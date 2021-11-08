@@ -12,8 +12,17 @@ import other from "../database/pop-brands/other.png";
 
 import ip13 from "../database/products/ip13.png";
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 export default class Home extends Component {
+  state = {
+    hover: [
+      true, false, false, false, false, false,
+    ]
+  }
+
   fetchEventsLinks = () => {
     return [
       event1,
@@ -46,28 +55,34 @@ export default class Home extends Component {
   fetchPopProducts = () => {
     return [
       {
-        name: "Iphone 13",
-        image: ip13
+        name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        image: ip13,
+        price: 12000000,
       },
       {
-        name: "Iphone 13",
-        image: ip13
+        name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        image: ip13,
+        price: 12000000,
       },
       {
-        name: "Iphone 13",
-        image: ip13
+        name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        image: ip13,
+        price: 12000000,
       },
       {
-        name: "Iphone 13",
-        image: ip13
+        name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        image: ip13,
+        price: 12000000,
       },
       {
-        name: "Iphone 13",
-        image: ip13
+        name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        image: ip13,
+        price: 12000000,
       },
       {
-        name: "Iphone 13",
-        image: ip13
+        name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        image: ip13,
+        price: 12000000,
       },
     ]
   }
@@ -82,6 +97,7 @@ export default class Home extends Component {
         <section className="com-grid">
           {events.map((e, index) => {
             return <div
+              key={index}
               className={`event-${index + 1}`}
               style={{
                 backgroundImage: `url(${e})`,
@@ -94,6 +110,7 @@ export default class Home extends Component {
         }}>
           {brands.map((b, index) => {
             return <div
+              key={index}
               className={`brand brand-${index + 1} no-select`}
               style={{
                 backgroundImage: `url(${b.image})`,
@@ -104,9 +121,31 @@ export default class Home extends Component {
         </section>
         <div className="label">POPULAR PRODUCTS</div>
         <section className="products-grid" >
-          {products.map(p => {
-            return <div>
+          {products.map((p, index) => {
+            return <div
+              key={index}
+              onMouseEnter={() => {
+                var hover = this.state.hover;
+                hover[index] = true;
+                this.setState({ hover: hover });
+              }}
+              onMouseLeave={() => {
+                var hover = this.state.hover;
+                hover[index] = false;
+                this.setState({ hover: hover });
+              }}
+            >
               <img src={p.image} alt={p.name} ></img>
+              <div
+                style={this.state.hover[index] ? {
+                  transform: "translateY(0)",
+                  opacity: 1,
+                  zIndex: 1,
+                } : {}}
+              >
+                {p.name}
+                <p>{numberWithCommas(p.price)} <u>đ</u></p>
+              </div>
             </div>
           })}
         </section>

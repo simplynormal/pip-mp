@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Inter");
 :root {
     --screen-width: 1300px;
     --padding-lr: 100px;
@@ -106,6 +107,7 @@
 }
 
 .products-grid {
+    position: relative;
     --gap-size: 15px;
     display: grid;
     gap: var(--gap-size);
@@ -119,8 +121,34 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .products-grid div img {
     height: 80%;
+}
+
+.products-grid div div {
+    font-family: "Inter";
+    display: block;
+    --size: calc((var(--screen-width) - 2 * var(--padding-lr) - 5 * (var(--gap-size))) / 6);
+    position: absolute;
+    margin-top: calc(var(--size) / 2);
+    height: calc(var(--size) / 2);
+    width: var(--size);
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 11px;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.3s ease 0s;
+    cursor: default;
+    z-index: -1;
+}
+
+.products-grid div div p {
+    position: absolute;
+    bottom: 15px;
+    font-weight: bold;
 }
