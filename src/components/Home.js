@@ -10,7 +10,12 @@ import samsung from "../database/pop-brands/samsung.png";
 import google from "../database/pop-brands/google.png";
 import other from "../database/pop-brands/other.png";
 
-import ip13 from "../database/products/ip13.png";
+import p1 from "../database/products/p1.png";
+import p2 from "../database/products/p2.png";
+import p3 from "../database/products/p3.png";
+import p4 from "../database/products/p4.png";
+import p5 from "../database/products/p5.png";
+import p6 from "../database/products/p6.png";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -19,7 +24,7 @@ function numberWithCommas(x) {
 export default class Home extends Component {
   state = {
     hover: [
-      true, false, false, false, false, false,
+      false, false, false, false, false, false,
     ]
   }
 
@@ -56,32 +61,32 @@ export default class Home extends Component {
     return [
       {
         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: ip13,
+        image: p1,
         price: 12000000,
       },
       {
         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: ip13,
+        image: p2,
         price: 12000000,
       },
       {
         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: ip13,
+        image: p3,
         price: 12000000,
       },
       {
         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: ip13,
+        image: p4,
         price: 12000000,
       },
       {
         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: ip13,
+        image: p5,
         price: 12000000,
       },
       {
         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: ip13,
+        image: p6,
         price: 12000000,
       },
     ]

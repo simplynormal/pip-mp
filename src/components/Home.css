@@ -79,7 +79,7 @@
 
 .brand:hover {
     transform: scale(1.02);
-    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 10px 10px 10px rgba(61, 37, 37, 1);
 }
 
 .brand-1 {
@@ -143,7 +143,6 @@
     transform: translateY(100%);
     opacity: 0;
     transition: all 0.3s ease 0s;
-    cursor: default;
     z-index: -1;
 }
 
