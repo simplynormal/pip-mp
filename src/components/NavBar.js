@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./NavBar.css"
-import { ReactComponent as Logo } from "../assets/NavBar/logo.svg"
+import { ReactComponent as Logo } from "../assets/logo.svg"
 import { ReactComponent as Account } from "../assets/NavBar/account.svg"
 
 export default class NavBar extends Component {

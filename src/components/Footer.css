@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web");
+:root {
+    --normal-font: 25px;
+    --smaller-font: 18px;
+    --position-top: 60px;
+}
+
+.footer {
+    width: 100%;
+    height: 450px;
+    background: #131212;
+}
+
+.container {
+    /* display: block; */
+    position: relative;
+    width: 1300px;
+    height: 100%;
+    margin: 0 auto 0 auto;
+    /* background: grey; */
+}
+
+.general {
+    position: absolute;
+    top: var(--position-top);
+    left: 50px;
+    /* background: green; */
+}
+
+.general p {
+    font-family: Istok Web;
+    font-style: normal;
+    font-weight: bold;
+    font-size: var(--normal-font);
+    line-height: 130%;
+    /* or 39px */
+    letter-spacing: 0.0075em;
+    color: #FFFFFF;
+}
+
+.general p.side-label {
+    font-weight: normal;
+    font-size: var(--smaller-font);
+}
+
+.general p.side-label span {
+    font-weight: bold;
+    color: #EC6666;
+}
+
+.logo-footer {
+    position: absolute;
+    top: 250px;
+    left: 100px;
+    width: 250px;
+    height: 120px;
+    fill: white;
+}
+
+.location {
+    position: absolute;
+    top: var(--position-top);
+    left: 800px;
+    width: 450px;
+}
+
+.location p {
+    font-family: Istok Web;
+    font-style: normal;
+    font-weight: bold;
+    font-size: var(--normal-font);
+    line-height: 130%;
+    /* or 39px */
+    letter-spacing: 0.0075em;
+    color: #FFFFFF;
+}
+
+.location p.city {
+    font-size: var(--smaller-font);
+}
+
+.location ul {
+    padding-left: 30px;
+}
+
+.location ul li {
+    color: white;
+    font-size: var(--smaller-font);
+}
