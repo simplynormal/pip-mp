@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Sarala");
+:root {
+    --selected-color: rgb(90, 174, 230);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+    width: 100vw;
+    background-color: black;
+    padding-right: 20px;
+}
+
+.logo {
+    height: 40px;
+    fill: white;
+    cursor: pointer;
+    margin: 0 2vw;
+}
+
+.nav-link {
+    list-style: none;
+}
+
+.nav-link li {
+    display: inline-block;
+}
+
+.nav-link li a {
+    width: 11vw;
+    font-family: "Sarala" sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+    color: white;
+}
+
+.nav-link li a:hover {
+    color: var(--selected-color);
+    transform: scale(1.2);
+}
+
+header input[type=text] {
+    width: 20vw;
+    margin: 0 20px 0 auto;
+    padding: 6px;
+    font-size: 17px;
+    border: none;
+    border-radius: 99px;
+    background: url("../assets/NavBar/search.svg");
+    background-repeat: no-repeat;
+    background-position: 1% 50%;
+    background-size: 25px 25px;
+    padding-left: 30px;
+    background-color: #606060;
+    color: white;
+    transition: all 0.3s ease 0s;
+}
+
+header input[type=text]::placeholder {
+    color: white;
+}
+
+header input[type=text]:focus {
+    width: 22vw;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: var(--selected-color);
+    outline-offset: 3px;
+}
+
+.suffix {
+    width: 30px;
+    fill: white;
+    cursor: pointer;
+    margin: 0 10px 0 10px;
+    transition: all 0.3s ease 0s;
+}
+
+.suffix:hover {
+    fill: var(--selected-color);
+    transform: scale(1.2);
+}
