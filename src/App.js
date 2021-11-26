@@ -1,16 +1,24 @@
-import { Footer } from './components/Footer';
-import Home from './components/Home';
-import NavBar from './components/NavBar';
+import React from 'react'
+import ProductPage from './components/ProductPage';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Homepage from './components/Homepage';
 
 function App() {
   return (
-    <div className="app">
-      <NavBar quantity={10} />
-      <Home />
+    <Router>
+    <div>
+      <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
 
-      {/* Footer */}
-      <Footer />
+        <Route exact path="/products">
+          <ProductPage />
+        </Route>
+        
+      </Switch>
     </div>
+  </Router>
   );
 }
 

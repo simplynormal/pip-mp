@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./Home.css"
+import "../css/Home.css"
 
 import event1 from "../database/events/event1.png";
 import event2 from "../database/events/event2.png";

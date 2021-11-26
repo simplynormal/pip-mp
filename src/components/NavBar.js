@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./NavBar.css"
+import "../css/NavBar.css"
 import { ReactComponent as Logo } from "../assets/logo.svg"
 import { ReactComponent as Account } from "../assets/NavBar/account.svg"
 
@@ -12,7 +12,7 @@ export default class NavBar extends Component {
         <a href="/"><Logo className="logo"></Logo></a>
         <nav>
           <ul className="nav-link">
-            <li><a href="/">PRODUCTS</a></li>
+            <li><a href="/products">PRODUCTS</a></li>
             <li><a href="/">NEWS</a></li>
             <li><a href="/">COUPONS</a></li>
             <li><a href="/">CONTACT</a></li>
