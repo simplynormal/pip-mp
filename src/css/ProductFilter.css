@@ -1,0 +1,233 @@
+.main-container .filter {
+    grid-column: 3 / 6;
+    padding-bottom: 100px;
+}
+
+.main-container .filter .label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: Quicksand;
+    font-weight: 800;
+    font-size: 24px;
+    margin-top: 35px;
+    margin-bottom: 50px;
+    width: 100%;
+    height: 60px;
+    border: 1px solid #9C9C9C;
+    border-radius: 8px;
+}
+
+
+.main-container .filter .label svg {
+    margin-right: 20px;
+}
+
+
+.main-container .filter .item {
+    font-family: Inter;
+    font-weight: 500;
+    padding: 10px;
+    min-height: 40px;
+    width: 100%;
+    margin: 25px 0 25px 0;
+    background: var(--secondary-background-color);
+    box-shadow: 0px 1px 2px rgba(58, 58, 68, 0.24), 0px 2px 4px rgba(90, 91, 106, 0.24);
+    border-radius: 4px;
+    transition: all 0.3s ease 0s;
+}
+
+
+.expand-button {
+    width: 12px;
+    height: 8px;
+    float: right;
+    margin-top: 6px;
+}
+
+/*
+Custom checkbox
+*/
+.check-container {
+    display: block;
+    position: relative;
+    padding-left: 50px;
+    margin: 15px 0 0 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default checkbox */
+.check-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 18px;
+    width: 18px;
+    background-color: transparent;
+    border: 2px solid #4A4B57;
+    border-radius: 2px;
+}
+
+/* On mouse-over, add a grey background color */
+.check-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check-container input:checked~.checkmark {
+    background-color: #4A4B57;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.check-container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-container .checkmark:after {
+    left: 4px;
+    top: 0px;
+    width: 3px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Price text input */
+.form-wrapper-outer {
+    width: 100%;
+    margin-top: 7%;
+    margin-left: 20px;
+}
+
+.field-wrapper {
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.field-wrapper input {
+    background: #F1F1F1;
+    border: 1px solid #696767;
+    padding: 15px;
+    border-radius: 4px;
+    width: 50%;
+    height: 30px;
+}
+
+.field-wrapper .field-placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    position: absolute;
+    bottom: 8px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #80868b;
+    padding: 0 8px;
+    -webkit-transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    cursor: text;
+    text-align: left;
+    width: fit-content;
+}
+
+.field-wrapper .field-placeholder span {
+    background: #F1F1F1;
+    padding: 0px 8px;
+}
+
+.field-wrapper input:not([disabled]):focus~.field-placeholder {
+    color: #1A73E8;
+}
+
+.field-wrapper input:not([disabled]):focus~.field-placeholder,
+.field-wrapper.hasValue input:not([disabled])~.field-placeholder {
+    -webkit-transform: scale(.75) translateY(-25px) translateX(-10px);
+    transform: scale(.75) translateY(-25px) translateX(-10px);
+}
+
+.field-wrapper u {
+    position: absolute;
+    top: 5px;
+    right: 52%;
+}
+
+.field-wrapper button {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: var(--grey-text-color);
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 2px 0 0 20px;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    font-size: 10px;
+    height: 10px;
+    width: 10px;
+}
+
+.field-wrapper button:hover {
+    background-color: #2264D1;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    transform: translateY(-1px);
+}
+
+.field-wrapper button:active {
+    background-color: #1a4fa5;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+}
+
+.field-wrapper button.big-btn {
+    width: 110px;
+    height: 30px;
+    margin: 0 10px 0 10px;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 700;
+    text-transform: unset;
+}

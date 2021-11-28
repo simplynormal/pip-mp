@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "../css/Home.css"
 
+import { numberWithCommas } from './Common';
+
 import event1 from "../database/events/event1.png";
 import event2 from "../database/events/event2.png";
 import event3 from "../database/events/event3.png";
@@ -17,9 +19,6 @@ import p4 from "../database/products/p4.png";
 import p5 from "../database/products/p5.png";
 import p6 from "../database/products/p6.png";
 
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 
 export default class Home extends Component {
   state = {
