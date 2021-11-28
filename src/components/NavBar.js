@@ -19,7 +19,10 @@ export default class NavBar extends Component {
           </ul>
         </nav>
         <input type="text" placeholder="Search.." />
-        <Account className="suffix" />
+       
+        <a href="/signin"> <Account className="suffix" /> </a>
+
+
         <svg className="suffix" viewBox="2 -5 35 41" style={{
           position: "relative",
           bottom: "6px"

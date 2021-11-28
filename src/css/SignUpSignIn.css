@@ -1,0 +1,228 @@
+.form-body {
+    margin: 0px;
+    height: 100vh;
+
+    box-sizing: border-box;
+    font-family: montserrat, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8e8e8;
+
+    background-image: url('../assets/phonebg.png');
+    background-size: cover;
+}
+
+input[type=text], input[type=password], button[type=submit] {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+} 
+
+input[type=checkbox] {
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background-color: #fafafa;
+    border: solid #b1b1b1 2px;
+    margin-top: 3px;
+    float: left;
+}
+
+.form-additional label {
+    color: #444;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+input[type=checkbox]:checked {
+    background-color: #fafafa;
+}
+
+button[type=submit] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    background-color: #04C35C;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 0px 10px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f9f9f9;
+    background: #04C45C;
+    border-radius: 5px;
+}
+
+.button {
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    transition: scale(1.02);
+}
+
+input[type=text] {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+input[type=text]:focus {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+form {
+    height: 500px;
+    margin-left: 0vw;
+    display: block;
+    position: relative;
+}
+
+form:after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 10px;
+    height: 500px;
+    width: 360px;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    z-index: 1;
+    box-shadow: 4px 4px 4px rgb(193, 193, 193) 4px 4px 4px rgb(193, 193, 193);
+    opacity: 40%;
+    background-color: #eee;
+}
+
+form .form-inner {
+    position: relative;
+    display: block;
+    padding: 30px;
+    z-index: 2;
+    /* background-color: #f8f8f8; */
+}
+
+form .form-inner h2 {
+    color: #111;
+    font-size: 24px;
+    font-weight: 750;
+    margin-left: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+form .form-inner .form-group {
+    display: block;  
+}
+
+
+.form-inner .form-group label {
+    display: block;
+    color: #444;
+    font-size: 12px;
+    margin-bottom: 5px;
+    transition: 0.4s;
+}
+
+.form-inner .form-group:focus-within label {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+form .form-inner .form-group input {
+    display: block;
+    width: 250px;
+    padding: 10px 10px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-bottom: 15px;
+}
+
+form .form-inner .form-group input:focus {
+    display: block;
+    
+    padding: 10px 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-bottom: 15px;
+    transform: scale(1.02);
+}
+
+.login-google {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    padding: 10px 10px 10px 10px;
+    margin: 0px 0px 0px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f9f9f9;
+
+
+    background: url("../assets/Google_Logo.svg");
+    background-repeat: no-repeat;
+    background-position: 7% 50%;
+    background-size: 17px 17px;
+
+    background-color: #444;
+
+
+    border-radius: 5px;
+}
+
+.button {
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.login-google:hover {
+    transform: scale(1.02);
+    box-shadow: 3px 3px 2px rgb(193, 193, 193);
+    offset: 3px;
+}
+
+.login:hover {
+    transform: scale(1.02);
+    box-shadow: 3px 3px 2px rgb(193, 193, 193);
+    offset: 3px;
+}
+
+.joinnow {
+    margin-top: 30px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.joinfree {
+    text-decoration: none;
+    color: rgb(43, 82, 120);
+}
+
+.forgotpass {
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgb(43, 108, 176);
+    float: right;
+    margin-top: 3px;
+    margin-right: 24px;
+}
+

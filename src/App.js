@@ -1,7 +1,9 @@
-import React from 'react'
-import ProductPage from './components/ProductPage';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProductPage from './components/ProductPage';
 import Homepage from './components/Homepage';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -14,6 +16,14 @@ function App() {
 
         <Route exact path="/products">
           <ProductPage />
+        </Route>
+
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
+
+        <Route exact path="/signin">
+          <SignIn />
         </Route>
         
       </Switch>

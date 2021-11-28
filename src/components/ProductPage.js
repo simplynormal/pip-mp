@@ -4,7 +4,7 @@ import Footer from "./Footer"
 import SearchBar from "./SearchBar";
 import FilterColumn from "./FilterColumn";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/Product.css";
 
 import ip13 from "../database/products/ip13.png";
