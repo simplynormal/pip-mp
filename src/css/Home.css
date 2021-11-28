@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto");
 @import url("https://fonts.googleapis.com/css2?family=Inter");
+
 :root {
     --screen-width: 1300px;
     --padding-lr: 100px;
-    --secondary-background-color: #F9F9F9;
 }
 
 * {
@@ -13,7 +13,7 @@
 }
 
 .home-container {
-    padding: 140px var(--padding-lr) 70px var(--padding-lr);
+    padding: 0px var(--padding-lr) 70px var(--padding-lr);
     width: var(--screen-width);
     margin: 0 auto;
 }

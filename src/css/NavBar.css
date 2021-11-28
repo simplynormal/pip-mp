@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarala");
+
 :root {
     --selected-color: rgb(90, 174, 230);
 }
@@ -14,6 +15,8 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    left: 0;
+    top: 0;
     height: 70px;
     width: 100vw;
     background-color: black;
@@ -38,7 +41,7 @@ header {
 
 .nav-link li a {
     width: 11vw;
-    font-family: "Sarala" sans-serif;
+    font-family: "Sarala"sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 15px;
@@ -96,5 +99,5 @@ header input[type=text]:focus {
 
 .suffix:hover {
     fill: var(--selected-color);
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
 }
