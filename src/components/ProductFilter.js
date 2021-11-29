@@ -89,7 +89,7 @@ function FilterItem({ name, cate }) {
 }
 
 function PriceFilter() {
-  const [expand, setExpand] = React.useState(false)
+  const [expand, setExpand] = React.useState(true)
   var fromPar = React.useRef(null)
   var fromRef = React.useRef(null)
   var toPar = React.useRef(null)
