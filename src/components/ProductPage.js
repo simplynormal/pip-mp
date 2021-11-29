@@ -9,7 +9,10 @@ function ProductPage() {
   const [searchText, setSearchText] = React.useState("")
 
   return (
-    <div className="product-container">
+    <div style={{
+      width: "1920px",
+      margin: "auto"
+    }}>
       <div className="search">
         <input
           type="text"
