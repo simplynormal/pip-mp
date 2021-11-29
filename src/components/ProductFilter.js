@@ -30,6 +30,8 @@ const filter = [
   },
 ]
 
+const EXPAND_TRANSITION = 200
+
 function Expansion({ expand }) {
   return expand ?
     <svg className="expand-button" viewBox="0 0 12 8"
@@ -42,6 +44,7 @@ function Expansion({ expand }) {
       <path d="M1.41 -7.62939e-08L6 4.59L10.59 -7.62939e-08L12 1.42L6 7.42L0 1.42L1.41 -7.62939e-08Z" />
     </svg>
 }
+
 
 function FilterItem({ name, cate }) {
   const [expand, setExpand] = React.useState(false)
@@ -64,7 +67,7 @@ function FilterItem({ name, cate }) {
       </div>
       <Expand
         open={expand}
-        duration={300}
+        duration={EXPAND_TRANSITION}
       >
         <form
           style={{
@@ -96,8 +99,8 @@ function PriceFilter() {
   var toPar = React.useRef(null)
   var toRef = React.useRef(null)
 
-  const filterNum = (s) => {
-    return numberWithCommas(s.replace(/[^0-9]/g, ''))
+  const filterInput = (s) => {
+    return numberWithCommas(s.substring(0, 15).replace(/[^0-9]/g, ''))
   }
 
   return (
@@ -118,7 +121,7 @@ function PriceFilter() {
       </div>
       <Expand
         open={expand}
-        duration={300}
+        duration={EXPAND_TRANSITION}
       >
         <div class="form-wrapper-outer">
           <div class="field-wrapper hasValue" ref={fromPar}>
@@ -127,7 +130,7 @@ function PriceFilter() {
               type="text"
               defaultValue="MIN"
               onChange={(e) => {
-                e.target.value = filterNum(e.target.value)
+                e.target.value = filterInput(e.target.value)
                 var value = e.target.value
                 if (value !== "") {
                   fromPar.current.className = "field-wrapper hasValue"
@@ -153,7 +156,7 @@ function PriceFilter() {
               type="text"
               defaultValue="MAX"
               onChange={(e) => {
-                e.target.value = filterNum(e.target.value)
+                e.target.value = filterInput(e.target.value)
                 var value = e.target.value
                 if (value !== "") {
                   toPar.current.className = "field-wrapper hasValue"
