@@ -55,12 +55,23 @@ function CheckoutRow() {
   ]
 }
 
-function Method({ item }) {
+function Method({ item, chosen, onClick }) {
+  const [hover, setHover] = React.useState(false)
+
   return (
-    <div className="method">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M10 5C7.2 5 5 7.2 5 10C5 12.8 7.2 15 10 15C12.8 15 15 12.8 15 10C15 7.2 12.8 5 10 5ZM10 0C4.5 0 0 4.5 0 10C0 15.5 4.5 20 10 20C15.5 20 20 15.5 20 10C20 4.5 15.5 0 10 0ZM10 18C5.6 18 2 14.4 2 10C2 5.6 5.6 2 10 2C14.4 2 18 5.6 18 10C18 14.4 14.4 18 10 18Z" fill="#2264D1" />
-      </svg>
+    <div className="method no-select"
+      onClick={onClick}
+      onMouseEnter={() => { setHover(true) }}
+      onMouseLeave={() => { setHover(false) }}
+      style={chosen ? { background: "#D8E6FF" } : (hover ? { background: "#f0f5ff" } : {})}
+    >
+      {chosen || hover ?
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M10 5C7.2 5 5 7.2 5 10C5 12.8 7.2 15 10 15C12.8 15 15 12.8 15 10C15 7.2 12.8 5 10 5ZM10 0C4.5 0 0 4.5 0 10C0 15.5 4.5 20 10 20C15.5 20 20 15.5 20 10C20 4.5 15.5 0 10 0ZM10 18C5.6 18 2 14.4 2 10C2 5.6 5.6 2 10 2C14.4 2 18 5.6 18 10C18 14.4 14.4 18 10 18Z" fill={chosen ? "#2264D1" : "#5c9bff"} />
+        </svg> :
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.5 0 0 4.5 0 10C0 15.5 4.5 20 10 20C15.5 20 20 15.5 20 10C20 4.5 15.5 0 10 0ZM10 18C5.6 18 2 14.4 2 10C2 5.6 5.6 2 10 2C14.4 2 18 5.6 18 10C18 14.4 14.4 18 10 18Z" fill="#2264D1" />
+        </svg>}
       <h1>{item.desc}</h1>
       <div>
         {item.img.map((Img, i) => {
@@ -73,6 +84,7 @@ function Method({ item }) {
 
 function CheckoutPage() {
   const titles = ["Image", "Product name", "Price / Product", "Total price", "Quantity"]
+  const [methodID, setMethodID] = React.useState(0)
 
   return (
     <div className="checkout-container">
@@ -106,7 +118,7 @@ function CheckoutPage() {
       </div>
       <div className="common-checkout" style={{
         marginTop: "0",
-        paddingTop: "35px"
+        padding: "35px 0 100px 0"
       }}>
         <div className="single-row">
           <User />
@@ -127,9 +139,25 @@ function CheckoutPage() {
           <line y1="1" x2="1140" y2="1" stroke="#ABABAB" stroke-width="2" />
         </svg>
         <div className="method-container">
-          {methods.map(item => {
-            return <Method item={item} />
+          {methods.map((item, i) => {
+            return <Method
+              key={i}
+              item={item}
+              chosen={i === methodID}
+              onClick={() => { setMethodID(i) }}
+            />
           })}
+        </div>
+        <div style={{
+          position: 'absolute',
+          right: "70px",
+          bottom: "50px"
+        }}>
+          <h3 className="total-cost" >Total cost:
+            <span>
+              91.000.000 <u>đ</u>
+            </span></h3>
+          <button className="proceed-btn">Proceed</button>
         </div>
       </div>
     </div>

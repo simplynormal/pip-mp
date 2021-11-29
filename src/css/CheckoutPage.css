@@ -123,7 +123,7 @@
 }
 
 .result-container .checkout-quantity svg:hover {
-    filter: brightness(1.75);
+    filter: brightness(1.2);
 }
 
 .result-container .checkout-quantity svg:active {
@@ -175,12 +175,7 @@
 .total-cost span {
     margin-left: 20px;
     font-family: Inter;
-    font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 158%;
-    display: flex;
-    align-items: center;
     letter-spacing: 0.0075em;
     color: #FF0000;
 }
@@ -257,10 +252,13 @@
     position: relative;
     width: 328px;
     height: 80px;
-    background: #D8E6FF;
-    border-radius: 4px;
+    background: white;
+    border-radius: 5px;
     margin-right: 20px;
     padding-left: 60px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
 }
 
 .method-container .method svg {
@@ -276,7 +274,7 @@
     margin-bottom: 6px;
     font-family: Roboto;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 15px;
     line-height: 150%;
     display: flex;
@@ -296,4 +294,39 @@
     margin-right: 4px;
     width: 48px;
     height: 30px;
+}
+
+.proceed-btn {
+    width: 246px;
+    height: 66px;
+    margin-top: 10px;
+    background: #0072C5;
+    border: none;
+    border-radius: 10px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 38px;
+    line-height: 158%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.0075em;
+    color: #FFFFFF;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease 0s;
+}
+
+.proceed-btn:hover {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: translate(-1px, -1px);
+    filter: brightness(1.2);
+}
+
+.proceed-btn:active {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    transform: translate(0, 0);
+    filter: grayscale(20%)
 }
