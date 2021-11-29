@@ -94,9 +94,12 @@ function perkTranslate(name) {
   }
 }
 
-function Item({ item }) {
+export function Item({ item }) {
   return (
-    <div className="item no-select">
+    <div
+      className="product-item no-select"
+      onClick={() => window.location.href = '/detail'}
+    >
       <img src={item.image} alt="p1" />
       <p>{item.name}</p>
       <div className="perk-container">
