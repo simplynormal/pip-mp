@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@430;500;700');
+
 .checkout-container {
     width: 1900px;
     margin: auto;
@@ -242,4 +244,56 @@
     letter-spacing: 0.44px;
     color: #474747;
     padding: 0 25px;
+}
+
+.method-container {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 65px;
+}
+
+.method-container .method {
+    position: relative;
+    width: 328px;
+    height: 80px;
+    background: #D8E6FF;
+    border-radius: 4px;
+    margin-right: 20px;
+    padding-left: 60px;
+}
+
+.method-container .method svg {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: calc(50% - 10px);
+    left: 18px;
+}
+
+.method-container .method h1 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.44px;
+    color: #19191D;
+}
+
+.method-container .method div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.method-container .method div svg {
+    position: unset;
+    margin-right: 4px;
+    width: 48px;
+    height: 30px;
 }
