@@ -4,6 +4,7 @@ import { Footer } from './components/Footer';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import ProductPage from './components/ProductPage';
+import CheckoutPage from './components/CheckoutPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/products" element={<ProductPage />} />
+            <Route exact path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </BrowserRouter >
       </div>

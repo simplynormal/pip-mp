@@ -10,7 +10,7 @@ function ProductPage() {
 
   return (
     <div style={{
-      width: "1920px",
+      width: "1900px",
       margin: "auto"
     }}>
       <div className="search">
