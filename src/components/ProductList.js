@@ -17,7 +17,7 @@ const items = [
     name: "Iphone 13",
     image: p1,
     price: 15000000,
-    perk: ["Hot deal!"]
+    perk: ["Hot deal!", "50% OFF"]
   },
   {
     name: "Iphone 13",
@@ -44,6 +44,12 @@ const items = [
     perk: ["Hot deal!"]
   },
 ]
+const filters = [
+  "Any brand",
+  "above $1050",
+  "2015-2021",
+  "Sample",
+]
 
 function Options() {
   return (
@@ -51,17 +57,18 @@ function Options() {
       <div className="outer-wrapper">
         <select>
           <option value="1">Price Ascending</option>
-          <option value="2">BMW</option>
-          <option value="3">Citroen</option>
+          <option value="2">Price Descending</option>
+          <option value="3">Latest</option>
+          <option value="4">Oldest</option>
         </select>
         <div className="field-wrapper">sort by</div>
       </div>
       <div className="outer-wrapper">
         <select>
           <option value="0">Condition</option>
-          <option value="1">Price Ascending</option>
-          <option value="2">BMW</option>
-          <option value="3">Citroen</option>
+          <option value="1">Available</option>
+          <option value="2">Out of Stock</option>
+          <option value="3">Contact</option>
         </select>
       </div>
       <div className="outer-wrapper">
@@ -76,17 +83,28 @@ function Options() {
   )
 }
 
+function perkTranslate(name) {
+  if (name === "Hot deal!") return {
+    "--perk-background": "#FDEDF2",
+    "--perk-color": "#C23564"
+  }
+  if (name.toLowerCase().includes("% off")) return {
+    "--perk-background": "#ECF7ED",
+    "--perk-color": "#37833B"
+  }
+}
+
 function Item({ item }) {
   return (
     <div className="item no-select">
       <img src={item.image} alt="p1" />
       <p>{item.name}</p>
-      {item.perk.map((name, i) => {
-        return (
-          <div className="perk-container" key={i} >
-            <div>{name}</div>
-          </div>)
-      })}
+      <div className="perk-container">
+        {item.perk.map((name, i) => {
+          return (
+            <div key={i} style={perkTranslate(name)}>{name}</div>)
+        })}
+      </div>
       <p className="price">
         {numberWithCommas(item.price)} <u>đ</u>
       </p>
@@ -102,15 +120,19 @@ function ProductList() {
     return items
   }
 
+  const fetchFilters = () => {
+    return filters
+  }
+
   return (
     <div className="products">
       <div className="products-container">
         <Options />
         <div className="filter-label">
           <p>Filter</p>
-          <div>Any brand</div>
-          <div>above $1050</div>
-          <div>2015-2021</div>
+          {fetchFilters().map((name, i) => {
+            return <div key={i} >{name}</div>
+          })}
         </div>
         <div className="list-container">
           {fetchItems().map((item, i) => {

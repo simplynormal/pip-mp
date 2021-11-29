@@ -1,6 +1,7 @@
 import React from 'react'
 import '../css/ProductFilter.css'
 import Expand from "react-expand-animated"
+import { numberWithCommas } from './Common'
 
 const filter = [
   {
@@ -95,6 +96,10 @@ function PriceFilter() {
   var toPar = React.useRef(null)
   var toRef = React.useRef(null)
 
+  const filterNum = (s) => {
+    return numberWithCommas(s.replace(/[^0-9]/g, ''))
+  }
+
   return (
     <div
       className="item no-select"
@@ -116,13 +121,13 @@ function PriceFilter() {
         duration={300}
       >
         <div class="form-wrapper-outer">
-          <div class="field-wrapper" ref={fromPar}>
+          <div class="field-wrapper hasValue" ref={fromPar}>
             <input
               ref={fromRef}
               type="text"
+              defaultValue="MIN"
               onChange={(e) => {
-                if (fromRef.current.value === "MIN")
-                  fromRef.current.value = e.target.value.replace("MIN", "")
+                e.target.value = filterNum(e.target.value)
                 var value = e.target.value
                 if (value !== "") {
                   fromPar.current.className = "field-wrapper hasValue"
@@ -142,11 +147,13 @@ function PriceFilter() {
                 fromRef.current.value = "MIN"
               }}>min</button>
           </div>
-          <div class="field-wrapper" ref={toPar}>
+          <div class="field-wrapper hasValue" ref={toPar}>
             <input
               ref={toRef}
               type="text"
+              defaultValue="MAX"
               onChange={(e) => {
+                e.target.value = filterNum(e.target.value)
                 var value = e.target.value
                 if (value !== "") {
                   toPar.current.className = "field-wrapper hasValue"
