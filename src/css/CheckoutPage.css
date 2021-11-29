@@ -120,6 +120,7 @@
     border-radius: 5px;
     fill: white;
     cursor: pointer;
+    transition: all 0.3s ease 0s;
 }
 
 .result-container .checkout-quantity svg:hover {

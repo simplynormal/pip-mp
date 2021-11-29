@@ -165,7 +165,7 @@ export default class CheckoutPage extends React.Component {
 
     return (
       <div className="checkout-container">
-        <div className="header-container">
+        <div className="header-container no-select">
           <div>
             <Logo />
             checkout
