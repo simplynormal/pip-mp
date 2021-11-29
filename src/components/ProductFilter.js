@@ -77,12 +77,12 @@ function FilterItem({ name, cate }) {
           {cate.map((item, index) => {
             return (
               <label
-                class="check-container"
+                className="check-container"
                 key={index}
               >
                 {item}
                 <input type="checkbox" />
-                <span class="checkmark"></span>
+                <span className="checkmark"></span>
               </label>
             )
           })}
@@ -123,8 +123,8 @@ function PriceFilter() {
         open={expand}
         duration={EXPAND_TRANSITION}
       >
-        <div class="form-wrapper-outer">
-          <div class="field-wrapper hasValue" ref={fromPar}>
+        <div className="form-wrapper-outer">
+          <div className="field-wrapper hasValue" ref={fromPar}>
             <input
               ref={fromRef}
               type="text"
@@ -140,7 +140,7 @@ function PriceFilter() {
               }}
             />
             <div
-              class="field-placeholder"
+              className="field-placeholder"
               onClick={() => { fromRef.current.focus() }}
             ><span>From</span></div>
             <u>đ</u>
@@ -150,7 +150,7 @@ function PriceFilter() {
                 fromRef.current.value = "MIN"
               }}>min</button>
           </div>
-          <div class="field-wrapper hasValue" ref={toPar}>
+          <div className="field-wrapper hasValue" ref={toPar}>
             <input
               ref={toRef}
               type="text"
@@ -166,7 +166,7 @@ function PriceFilter() {
               }}
             />
             <div
-              class="field-placeholder"
+              className="field-placeholder"
               onClick={() => { toRef.current.focus() }}
             ><span>To</span></div>
             <u>đ</u>
