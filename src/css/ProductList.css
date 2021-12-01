@@ -182,7 +182,7 @@
 .product-item .item-footer .add-cart:hover {
     background-color: #9ac1ff;
     color: black;
-    fill: black;
+    fill: var(--grey-text-color);
     transform: translateY(-1px)
 }
 
