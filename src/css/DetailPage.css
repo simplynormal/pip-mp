@@ -1,0 +1,284 @@
+.detail-container {
+    width: 80vw;
+    margin: auto;
+}
+
+.frame-container {
+    padding: 50px 160px 100px 90px;
+    background: #F9F9F9;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.main-frame {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-frame .detail-img-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 460px;
+    padding: 25px;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.main-frame .detail-img-wrapper img {
+    height: 340px;
+    width: auto;
+}
+
+.main-frame .detail-img-wrapper .nav-arrow {
+    --offset: 25px;
+    position: absolute;
+    width: 19px;
+    height: 32px;
+    fill: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.main-frame .detail-img-wrapper .nav-arrow:hover {
+    transform: scale(1.1)
+}
+
+.main-frame .detail-img-wrapper .nav-arrow.left {
+    left: var(--offset)
+}
+
+.main-frame .detail-img-wrapper .nav-arrow.right {
+    right: var(--offset)
+}
+
+.main-frame .description {
+    font-family: Inter;
+    margin-left: 100px;
+    padding-top: 40px;
+    letter-spacing: 0.0075em;
+}
+
+.main-frame .description .name-desc {
+    font-style: normal;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    color: #000000;
+}
+
+.main-frame .description .price-desc {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    color: #498CF0;
+}
+
+.main-frame .description .short-desc {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    line-height: 158%;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.main-frame .description .choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 90px);
+    grid-auto-rows: 50px;
+}
+
+.main-frame .description .choices button {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.44px;
+    color: #FFFFFF;
+    background: #9B9B9B;
+    border-radius: 5px;
+    padding: 7px;
+    height: 35px;
+    width: fit-content;
+    margin: auto;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease 0s;
+}
+
+.main-frame .description .choices button:hover {
+    transform: scale(1.2);
+}
+
+.main-frame .description .choices button.active {
+    background: #383838;
+    transform: scale(1.25);
+}
+
+.main-frame .description .colors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 40px);
+    column-gap: 15px;
+    grid-auto-rows: 40px;
+    margin-top: 20px;
+}
+
+
+.main-frame .description .colors button {
+    border: 1px solid #B9B9B9;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: auto;
+    cursor: pointer;
+    transition: all 0.1s ease 0s;
+}
+
+.main-frame .description .colors button:hover {
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+}
+
+.main-frame .description .colors button.active {
+    border: 4px solid #403131;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.main-frame .btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.main-frame .btn-container button {
+    background: var(--color);
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    padding: 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 143%;
+    letter-spacing: 0.018em;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.main-frame .btn-container button:hover {
+    transform: translate(-1px, -1px);
+    background: rgb(61, 161, 255);
+}
+
+.main-frame .btn-container button:active {
+    transform: translate(0, 0);
+    background: rgb(0, 113, 219);
+}
+
+.main-frame .btn-container button svg {
+    width: 51px;
+    height: 51px;
+    margin-right: 7px;
+    fill: white;
+}
+
+.second-frame {
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+.second-frame .brand-desc {
+    background: #FFFFFF;
+    width: 460px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 30px;
+    margin-right: 100px;
+}
+
+.second-frame .brand-desc h1 {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 0.0075em;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.second-frame .brand-desc p {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 130%;
+    letter-spacing: 0.0075em;
+    color: #000000;
+}
+
+.second-frame table {
+    font-family: Inter;
+    border-collapse: collapse;
+    table-layout: auto;
+    font-size: 18px;
+    width: 100%;
+}
+
+.second-frame table th {
+    width: 1%;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.second-frame table td, .second-frame table th {
+    border: 1px solid black;
+    padding: 15px 20px;
+}
+
+.second-frame table tr:nth-child(odd) {
+    background-color: #E3E1E1;
+}
+
+.second-frame table tr:hover {
+    background-color: rgb(216, 235, 252);
+}
+
+.related-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 158%;
+    letter-spacing: 0.0075em;
+    text-transform: uppercase;
+    margin-top: 45px;
+    color: #131212;
+}
+
+.related-container {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(250px, 1fr));
+    column-gap: 2%;
+    padding: 20px;
+}

@@ -5,8 +5,37 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+body::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+body::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white;
+    /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+:root {
+    --primary-background-color: white;
+    --secondary-background-color: #F9F9F9;
 }
 
 .no-select {
@@ -22,4 +51,9 @@ code {
     /* Internet Explorer/Edge */
     user-select: none;
     /* Non-prefixed version, currently */
+}
+
+.app .app-container {
+    margin-top: 120px;
+    min-height: 500px;
 }
