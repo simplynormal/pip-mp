@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import ProductPage from './components/ProductPage';
 import DetailPage from './components/DetailPage';
+import CheckoutPage from './components/CheckoutPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/products" element={<ProductPage />} />
             <Route exact path="/detail" element={<DetailPage />} />
+            <Route exact path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </BrowserRouter >
       </div>

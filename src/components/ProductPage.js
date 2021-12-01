@@ -10,10 +10,10 @@ function ProductPage() {
 
   return (
     <div style={{
-      width: "1920px",
+      width: "1900px",
       margin: "auto"
     }}>
-      <div className="search">
+      {/* <div className="search">
         <input
           type="text"
           placeholder="Search.."
@@ -27,7 +27,7 @@ function ProductPage() {
         >
           <path d="M24 2.41714L21.5829 0L12 9.58286L2.41714 0L0 2.41714L9.58286 12L0 21.5829L2.41714 24L12 14.4171L21.5829 24L24 21.5829L14.4171 12L24 2.41714Z" fill="#505050" />
         </svg>
-      </div>
+      </div> */}
       <div className="main-container">
         <ProductFilter />
         <ProductList />

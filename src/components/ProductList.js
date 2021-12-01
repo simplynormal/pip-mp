@@ -101,19 +101,24 @@ export function Item({ item }) {
       onClick={() => window.location.href = '/detail'}
     >
       <img src={item.image} alt="p1" />
-      <p>{item.name}</p>
+      <p className="product-text" >{item.name}</p>
       <div className="perk-container">
         {item.perk.map((name, i) => {
           return (
             <div key={i} style={perkTranslate(name)}>{name}</div>)
         })}
       </div>
-      <p className="price">
-        {numberWithCommas(item.price)} <u>đ</u>
-      </p>
-      <button className="add-cart">
-        <Cart className="cart-logo" />
-        Add to cart</button>
+      <div className="item-footer">
+        <p className="product-text" style={{
+          fontWeight: "bold",
+        }}>
+          {numberWithCommas(item.price)} <u>đ</u>
+        </p>
+        <button className="add-cart">
+          <Cart className="cart-logo" />
+          Add to cart
+        </button>
+      </div>
     </div>
   )
 }
