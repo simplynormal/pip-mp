@@ -2,16 +2,30 @@ import React from 'react'
 import '../css/DetailPage.css'
 import { Item as ProductItem } from './ProductList'
 import p1 from "../database/products/p1.png";
+import { numberWithCommas } from './Common';
 
 const item = {
-  name: "Iphone 13",
+  name: "iPhone 13 Pro",
   image: p1,
   price: 15000000,
-  perk: ["Hot deal!"]
+  perk: ["Hot deal!"],
+  shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
 }
 
 const choices = ["128GB", "256GB", "512GB"]
 const colors = ["white", "#CB2032", "#1F4D78", "#D6AC19"]
+const specs = {
+  screen: "6.1”, OLED, Super Retina XDR, ProMotion 120Hz",
+  camera: "3 cameras 12 MP, LiDAR sensor",
+  battery: "Up to 22 hours",
+  ram: "4GB",
+  material: "Stainless Steel, Ceramic Shield",
+}
+
+const brand = {
+  name: "Apple",
+  desc: "Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services. Apple is the world's largest technology company by revenue and valuable."
+}
 
 function DetailPage() {
   const choicesRef = React.useRef([]);
@@ -20,12 +34,12 @@ function DetailPage() {
   React.useEffect(() => {
     choicesRef.current = choicesRef.current.slice(0, choices.length);
     choicesRef.current[0].className = "active"
-  }, [choices]);
+  });
 
   React.useEffect(() => {
     colorsRef.current = colorsRef.current.slice(0, colors.length);
     colorsRef.current[0].className = "active"
-  }, [colors]);
+  });
 
   return (
     <div className="detail-container">
@@ -41,9 +55,9 @@ function DetailPage() {
             </svg>
           </div>
           <div className="description">
-            <h1 className="name-desc">iPhone 13 Pro</h1>
-            <h2 className="price-desc">27.000.000 <u>đ</u></h2>
-            <p className="short-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+            <h1 className="name-desc">{item.name}</h1>
+            <h2 className="price-desc">{numberWithCommas(item.price)} <u>đ</u></h2>
+            <p className="short-desc">{item.shortDesc}</p>
             <div className="choices">
               {choices.map((name, i) => {
                 return <button
@@ -89,32 +103,34 @@ function DetailPage() {
         <div className="second-frame">
           <div>
             <div className="brand-desc">
-              <h1>About Apple</h1>
-              <p>Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services. Apple is the world's largest technology company by revenue and valuable.</p>
+              <h1>About {brand.name}</h1>
+              <p>{brand.desc}</p>
             </div>
           </div>
-          <table id="customers">
-            <tr>
-              <th>Screen</th>
-              <td>6.1”, OLED, Super Retina XDR, ProMotion 120Hz</td>
-            </tr>
-            <tr>
-              <th>Camera</th>
-              <td>3 cameras 12 MP, LiDAR sensor</td>
-            </tr>
-            <tr>
-              <th>Battery</th>
-              <td>Up to 22 hours</td>
-            </tr>
-            <tr>
-              <th>RAM</th>
-              <td>4 GB</td>
-            </tr>
-            <tr>
-              <th>Material</th>
-              <td>Stainless Steel, Ceramic Shield</td>
-            </tr>
-          </table>
+          <div>
+            <table id="customers">
+              <tr>
+                <th>Screen</th>
+                <td>{specs.screen}</td>
+              </tr>
+              <tr>
+                <th>Camera</th>
+                <td>{specs.camera}</td>
+              </tr>
+              <tr>
+                <th>Battery</th>
+                <td>{specs.battery}</td>
+              </tr>
+              <tr>
+                <th>RAM</th>
+                <td>{specs.ram}</td>
+              </tr>
+              <tr>
+                <th>Material</th>
+                <td>{specs.material}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
       <h1 className="related-label">RELATED PRODUCTS</h1>
