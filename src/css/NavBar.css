@@ -98,3 +98,83 @@ header input[type=text]:focus {
     fill: var(--selected-color);
     transform: scale(1.2);
 }
+
+
+.popup-link {
+    text-decoration: none;
+    color: white;
+}
+
+
+.li-popup {
+    font-family: "Sarala" sans-serif;
+    display: none;
+    border-radius: 5px;
+}
+
+.account:hover .ul-popup .li-popup {
+    display: block;
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 1rem 1rem 0.8rem 1rem;
+    
+    right: 55px;
+    font-weight: 400;
+}
+
+.account:hover .ul-popup .li-popup:hover {
+    font-weight: 600;
+}
+
+.li-cart {
+    display: none;
+}
+
+
+.cart-summary:hover .ul-cart .li-cart{
+    display:block;
+    position: absolute;
+    background-color: #f0f0f0;
+    padding: 10px 10px 10px 10px;
+    right: 20px;
+    margin-top: 3px;
+    width: 270px;
+    height: 180px;
+    border-radius: 4px;
+    color: black;
+    padding-left: 20px;
+}
+
+.header-cart {
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 20px;
+    width: 100px;
+}
+
+.item-cart {
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    width: 100px;
+}
+
+.cart-checkout {
+    background-color: #F00;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease 0s;
+}
+
+.cart-checkout:hover {
+    transform: scale(1.02);
+    box-shadow: 1px 1px 1px rgb(193, 193, 193);
+}
