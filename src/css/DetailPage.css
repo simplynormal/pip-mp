@@ -113,18 +113,16 @@
     margin: auto;
     cursor: pointer;
     border: none;
-    transition: all 0.3s ease 0s;
+    transition: all 0.2s ease 0s;
 }
 
 .main-frame .description .choices button:hover {
-    font-size: 20px;
-    height: 38px;
+    transform: scale(1.2);
 }
 
 .main-frame .description .choices button.active {
     background: #383838;
-    font-size: 22px;
-    height: 40px;
+    transform: scale(1.25);
 }
 
 .main-frame .description .colors {
