@@ -18,7 +18,7 @@
     margin-left: 2px;
 }
 
-input[type=text], input[type=password], button[type=submit] {
+input[type=text].inp-signup, input[type=password].inp-signup, button[type=submit].inp-signup {
     appearance: none;
     background: none;
     border: none;
@@ -26,9 +26,9 @@ input[type=text], input[type=password], button[type=submit] {
     margin: 0px 0px 10px 10px;
     font-size: 14px;
     text-indent: 10px;
-} 
+}
 
-button[type=submit] {
+button[type=submit].inp-signup {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +44,7 @@ button[type=submit] {
 }
 
 
-input[type=text]:focus {
+input[type=text].inp-signup:focus {
     appearance: none;
     background: none;
     border: none;
@@ -102,7 +102,7 @@ input[type=text]:focus {
 }
 
 .form-signup .form-inner .form-group {
-    display: block;  
+    display: block;
 }
 
 
@@ -120,13 +120,13 @@ input[type=text]:focus {
 
 .form-signup .form-inner .form-group input:focus {
     display: block;
-    
+
     padding: 10px 10px;
     background-color: #f9f9f9;
     border-radius: 8px;
     transition: 0.4s;
     margin-bottom: 15px;
-    
+
 }
 
 
@@ -161,7 +161,7 @@ input[type=text]:focus {
 
 .button {
     transition-duration: 0.4s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
@@ -222,14 +222,6 @@ input[type=checkbox] {
     margin-left: 10px;
 }
 
-input[type=checkbox]:checked {
-    background-color: #fafafa;
-}
-
-input[type=checkbox]:hover {
-    transform: scale(1.1);
-}
-
 .form-inner .form-group label {
     display: block;
     color: #444;
@@ -241,4 +233,4 @@ input[type=checkbox]:hover {
 .form-inner .form-group:focus-within label {
     font-size: 14px;
     font-weight: 900;
-} 
+}

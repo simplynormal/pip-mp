@@ -18,7 +18,7 @@
     margin-left: 2px;
 }
 
-input[type=text], input[type=password], button[type=submit] {
+input[type=text].inp-signin, input[type=password].inp-signin, button[type=submit].btn-signin {
     appearance: none;
     background: none;
     border: none;
@@ -26,10 +26,10 @@ input[type=text], input[type=password], button[type=submit] {
     margin: 0px 0px 10px 10px;
     font-size: 14px;
     text-indent: 10px;
-} 
+}
 
 
-button[type=submit] {
+button[type=submit].btn-signin {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,7 @@ button[type=submit] {
 }
 
 
-input[type=text]:focus {
+input[type=text].inp-signin:focus {
     appearance: none;
     background: none;
     border: none;
@@ -95,7 +95,7 @@ input[type=text]:focus {
 }
 
 .form-inner .form-group {
-    display: block;  
+    display: block;
 }
 
 
@@ -125,7 +125,7 @@ input[type=text]:focus {
 
 .form-signin .form-inner .form-group input:focus {
     display: block;
-    
+
     padding: 10px 10px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -166,7 +166,7 @@ input[type=text]:focus {
 
 .button {
     transition-duration: 0.4s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
@@ -215,7 +215,7 @@ input[type=text]:focus {
 }
 
 /* Remember Me checkbox */
-input[type=checkbox] {
+input[type=checkbox].remember-me {
     width: auto;
     height: auto;
     border-radius: 12px;
@@ -234,10 +234,10 @@ input[type=checkbox] {
     margin-left: 10px;
 }
 
-input[type=checkbox]:checked {
+input[type=checkbox].remember-me:checked {
     background-color: #fafafa;
 }
 
-input[type=checkbox]:hover {
+input[type=checkbox].remember-me:hover {
     transform: scale(1.1);
 }

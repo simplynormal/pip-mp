@@ -16,18 +16,18 @@ export default class SignIn extends Component {
 
               <div className="form-group">
                 <label htmlFor="email">Email<big className="required">*</big></label>
-                <input type="text" name="email" id="email" required />
+                <input className="inp-signin" type="text" name="email" id="email" required />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password">Password<big className="required">*</big></label>
-                <input type="password" name="password" id="password" required />
+                <input className="inp-signin" type="password" name="password" id="password" required />
 
               </div>
 
               <div className="form-additional remember">
-                <label htmlFor="remember">Remember me</label>
-                <input type="checkbox" name="remember" id="remember" />
+                <label className="remember-me" htmlFor="remember">Remember me</label>
+                <input className="inp-signin" type="checkbox" name="remember" id="remember" />
 
                 <span><a href="/resetpassword" className="forgotpass">
                   Forgot password?</a></span>
@@ -36,7 +36,7 @@ export default class SignIn extends Component {
               <br />
 
               <div className="form-group">
-                <button type="submit" className="login"
+                <button className="btn-signin login" type="submit"
                   onClick={() => { window.location.href = "/products" }}>
                   Login now
                 </button>
