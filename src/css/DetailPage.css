@@ -1,5 +1,5 @@
 .detail-container {
-    width: 1600px;
+    width: 80vw;
     margin: auto;
 }
 
@@ -278,7 +278,7 @@
 
 .related-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: normal;
+    grid-template-columns: repeat(5, minmax(250px, 1fr));
+    column-gap: 2%;
     padding: 20px;
 }
