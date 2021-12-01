@@ -138,6 +138,7 @@ export default class Home extends Component {
                 hover[index] = false;
                 this.setState({ hover: hover });
               }}
+              onClick={() => window.location.href = '/detail'}
             >
               <img src={p.image} alt={p.name} ></img>
               <div
