@@ -18,7 +18,7 @@
     margin-left: 2px;
 }
 
-input[type=text].inp-signup, input[type=password].inp-signup, button[type=submit].inp-signup {
+input[type=text].inp-signup, input[type=password].inp-signup, button[type=submit].btn-signup {
     appearance: none;
     background: none;
     border: none;
@@ -28,7 +28,7 @@ input[type=text].inp-signup, input[type=password].inp-signup, button[type=submit
     text-indent: 10px;
 }
 
-button[type=submit].inp-signup {
+button[type=submit].btn-signup {
     display: flex;
     align-items: center;
     justify-content: center;

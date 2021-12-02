@@ -43,7 +43,7 @@ export default class SignUp extends Component {
               <br />
 
               <div className="form-group">
-                <button type="submit" className="login">
+                <button type="submit" className="btn-signup login">
                   Sign Up
                 </button>
               </div>
