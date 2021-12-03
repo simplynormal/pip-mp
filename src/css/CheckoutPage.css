@@ -103,13 +103,13 @@
     letter-spacing: 0.0075em;
 }
 
-.result-container .checkout-quantity {
+.checkout-quantity {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.result-container .checkout-quantity svg {
+.checkout-quantity svg {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,15 +123,15 @@
     transition: all 0.3s ease 0s;
 }
 
-.result-container .checkout-quantity svg:hover {
+.checkout-quantity svg:hover {
     filter: brightness(1.2);
 }
 
-.result-container .checkout-quantity svg:active {
+.checkout-quantity svg:active {
     filter: grayscale(30%)
 }
 
-.result-container .checkout-quantity p, textarea {
+.checkout-quantity p, textarea {
     width: 50px;
     font-family: Roboto;
     font-style: normal;

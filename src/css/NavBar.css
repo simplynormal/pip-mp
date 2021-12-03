@@ -72,7 +72,7 @@ header input[type=text] {
     background-repeat: no-repeat;
     background-position: 1% 50%;
     background-size: 25px 25px;
-    padding-left: 30px;
+    padding-left: 35px;
     background-color: #606060;
     color: white;
     transition: all 0.3s ease 0s;
@@ -94,91 +94,195 @@ header input[type=text]:focus {
     width: 30px;
     fill: white;
     cursor: pointer;
-    margin: 0 10px 0 10px;
     transition: all 0.3s ease 0s;
 }
 
 .suffix:hover {
     fill: var(--selected-color);
-    /* transform: scale(1.2); */
 }
 
-
-.popup-link {
-    text-decoration: none;
-    color: white;
+.account {
+    position: relative;
+    margin: 0 10px 0 10px;
 }
 
+.account:hover .account-hover {
+    width: 30px;
+    height: 30px;
+    background: green;
+    position: absolute;
+}
 
-.li-popup {
-    font-family: "Sarala"sans-serif;
+.cart {
+    position: relative;
+    margin: 0 10px 0 10px;
+}
+
+.cart-hover {
     display: none;
+}
+
+.cart-hover .container {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.cart:hover .cart-hover {
+    display: block;
+    position: absolute;
+    width: 510px;
+    top: 40px;
+    right: 0;
+    background: #F8F8F8;
+    box-shadow:
+        0px 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cart:hover .cart-hover .row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.cart:hover .cart-hover .row .img-wrapper {
+    display: flex;
+    padding: 7px;
+    align-items: center;
+    justify-content: center;
+    background: #F0F0F0;
     border-radius: 5px;
-}
-
-.account:hover .ul-popup .li-popup {
-    display: block;
-    position: absolute;
-    background-color: black;
-    color: white;
-    padding: 1rem 1rem 0.8rem 1rem;
-
-    right: 55px;
-    font-weight: 400;
-}
-
-.account:hover .ul-popup .li-popup:hover {
-    font-weight: 600;
-}
-
-.li-cart {
-    display: none;
-}
-
-
-.cart-summary:hover .ul-cart .li-cart {
-    display: block;
-    position: absolute;
-    background-color: #f0f0f0;
-    padding: 10px 10px 10px 10px;
-    right: 20px;
-    margin-top: 3px;
-    width: 270px;
-    height: 180px;
-    border-radius: 4px;
-    color: black;
-    padding-left: 20px;
-}
-
-.header-cart {
-    font-size: 14px;
-    font-weight: 600;
     margin-right: 20px;
-    width: 100px;
 }
 
-.item-cart {
-    font-size: 12px;
-    font-weight: 400;
-    margin-right: 30px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    width: 100px;
+.cart:hover .cart-hover .row .img-wrapper img {
+    height: 75px;
+    width: auto;
 }
 
-.cart-checkout {
-    background-color: #F00;
-    color: white;
-    padding: 5px;
+.cart:hover .cart-hover .row .desc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    width: 250px;
+    margin-right: 15px;
+}
+
+.cart:hover .cart-hover .row .desc .name {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.44px;
+}
+
+.cart:hover .cart-hover .row .desc .perk-container {
+    display: flex;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.cart:hover .cart-hover .row .desc .perk-container .perk-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 7px 0 7px;
+    margin: 0 5px 0 0;
+    width: fit-content;
+    height: 20px;
+    background: var(--perk-background);
+    color: var(--perk-color);
+    font-family: Roboto;
+    font-size: 9px;
+    border-radius: 4px;
+}
+
+.cart:hover .cart-hover .row .desc .price {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
     font-size: 12px;
-    font-weight: 700;
-    outline: none;
-    border: none;
+    line-height: 158%;
+    letter-spacing: 0.0075em;
+}
+
+.cart:hover .cart-hover .last-row {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.cart:hover .cart-hover .last-row .total-label {
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 150%;
+    margin-left: 10px;
+    /* or 30px */
+
+    color: #595959;
+}
+
+.cart:hover .cart-hover .last-row .total-label span {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 158%;
+    /* or 32px */
+    letter-spacing: 0.0075em;
+
+    /* Gray / 60 */
+
+    color: #000000;
+}
+
+.cart:hover .cart-hover .last-row button {
+    width: 120px;
+    height: 35px;
+    left: 0px;
+    top: 0px;
+    margin: 0 10px 0 auto;
+
+    background: rgb(255, 32, 32);
     border-radius: 5px;
-    transition: all 0.3s ease 0s;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 158%;
+    border: none;
+    cursor: pointer;
+    /* or 32px */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.0075em;
+
+    color: #FFFFFF;
+    transition: all 0.2s ease 0s;
 }
 
-.cart-checkout:hover {
-    transform: scale(1.02);
-    box-shadow: 1px 1px 1px rgb(193, 193, 193);
+.cart:hover .cart-hover .last-row button:hover {
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    transform: translate(-1px, -1px)
+}
+
+.cart:hover .cart-hover .last-row button:active {
+    filter: grayscale(25%);
+    transform: translate(0, 0);
 }

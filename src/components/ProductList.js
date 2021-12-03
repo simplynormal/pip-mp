@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/ProductList.css'
 
-import { numberWithCommas } from './Common';
+import { numberWithCommas, perkTranslate } from './Common';
 
 import p1 from "../database/products/p1.png";
 import { ReactComponent as Cart } from "../assets/ProductPage/cart.svg"
@@ -81,17 +81,6 @@ function Options() {
       </div>
     </div>
   )
-}
-
-function perkTranslate(name) {
-  if (name === "Hot deal!") return {
-    "--perk-background": "#FDEDF2",
-    "--perk-color": "#C23564"
-  }
-  if (name.toLowerCase().includes("% off")) return {
-    "--perk-background": "#ECF7ED",
-    "--perk-color": "#37833B"
-  }
 }
 
 export function Item({ item }) {

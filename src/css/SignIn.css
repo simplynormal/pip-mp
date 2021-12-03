@@ -1,14 +1,14 @@
 .form-body {
-    margin: 0px;
-    height: 100vh;
+    margin: auto;
+    width: 40vw;
+    height: 60vh;
 
     box-sizing: border-box;
     font-family: montserrat, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e8e8e8;
-
+    border-radius: 2%;
     background-image: url('../assets/phonebg.png');
     background-size: cover;
 }
@@ -39,7 +39,7 @@ button[type=submit].btn-signin {
     margin: 10px 0px 10px 10px;
     font-size: 16px;
     font-weight: 700;
-    color: #f9f9f9;
+    color: #e8e8e8;
     background: #04C45C;
     border-radius: 5px;
 }
@@ -65,12 +65,12 @@ input[type=text].inp-signin:focus {
     display: block;
     position: absolute;
     border-radius: 10px;
-    height: 500px;
-    width: 360px;
     top: -10px;
     bottom: -10px;
     left: -10px;
     right: -10px;
+    height: 500px;
+    width: 360px;
     z-index: 1;
     box-shadow: 4px 4px 4px rgb(193, 193, 193) 4px 4px 4px rgb(193, 193, 193);
     opacity: 30%;
@@ -107,15 +107,16 @@ input[type=text].inp-signin:focus {
     margin: 0px 0px 5px 10px;
 }
 
+/* 
 .form-inner .form-group:focus-within label {
     font-size: 14px;
     font-weight: 900;
-}
+} */
 
 .form-signin .form-inner .form-group input {
     display: block;
     width: 90%;
-    padding: 10px 10px 10px 10px;
+    padding: 10px 5px 10px 5px;
     background-color: #fafafa;
     float: left;
     border-radius: 8px;
@@ -125,13 +126,11 @@ input[type=text].inp-signin:focus {
 
 .form-signin .form-inner .form-group input:focus {
     display: block;
-
-    padding: 10px 10px;
     background-color: #f9f9f9;
     border-radius: 8px;
     transition: 0.4s;
     margin-bottom: 15px;
-    transform: scale(1.02);
+    /* transform: scale(1.02); */
 }
 
 

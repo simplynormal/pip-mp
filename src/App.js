@@ -20,8 +20,8 @@ function App() {
             <Route exact path="/products" element={<ProductPage />} />
             <Route exact path="/detail" element={<DetailPage />} />
             <Route exact path="/checkout" element={<CheckoutPage />} />
-            <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/signin" element={<SignIn />} />
+            {/* <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/signin" element={<SignIn />} /> */}
           </Routes>
         </BrowserRouter >
       </div>
