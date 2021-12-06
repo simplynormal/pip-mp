@@ -179,9 +179,8 @@
 }
 
 .product-item .item-footer .add-cart:hover {
-    background-color: #9ac1ff;
-    color: black;
-    fill: var(--grey-text-color);
+    background-color: #2264D1;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     transform: translateY(-1px)
 }
 
