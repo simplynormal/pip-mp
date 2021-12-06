@@ -73,7 +73,7 @@ Custom checkbox
 }
 
 /* Create a custom checkbox */
-.checkmark {
+.check-container .checkmark {
     position: absolute;
     top: 0;
     left: 10px;
@@ -95,7 +95,7 @@ Custom checkbox
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+.check-container .checkmark:after {
     content: "";
     position: absolute;
     display: none;

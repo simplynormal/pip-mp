@@ -61,7 +61,7 @@ header {
     transform: scale(1.2);
 }
 
-header input[type=text] {
+header input[type=text].searchbar {
     width: 20vw;
     margin: 0 20px 0 auto;
     padding: 6px;
@@ -78,11 +78,12 @@ header input[type=text] {
     transition: all 0.3s ease 0s;
 }
 
-header input[type=text]::placeholder {
+header input[type=text].searchbar::placeholder {
     color: white;
 }
 
-header input[type=text]:focus {
+header input[type=text]:focus,
+header input[type=password]:focus {
     width: 22vw;
     box-shadow:
         0px 0px 10px var(--selected-color),

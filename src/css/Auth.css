@@ -1,0 +1,234 @@
+.sign-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    display: flex;
+    flex: 0 0;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+
+.form-body {
+    --size: 30vw;
+    width: var(--size);
+    height: calc(var(--size) * 3 / 2);
+    position: relative;
+
+    box-sizing: border-box;
+    font-family: montserrat, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2%;
+    background-image: url('../assets/phonebg.png');
+    background-size: cover;
+    background-position: 45% 0;
+}
+
+.form-body .btn-close {
+    position: absolute;
+    top: 4%;
+    right: 7%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.form-body .main {
+    width: 60%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+}
+
+.form-body .main h2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.form-body .main h1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 35px;
+
+    color: #000000;
+}
+
+.form-body .main form {
+    margin-top: 25px;
+}
+
+.form-body .main form label.text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #4A5568;
+}
+
+.form-body .main form label.text input[type=text],
+.form-body .main form label.text input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-body .main .inline {
+    display: flex;
+    align-content: center;
+    margin-block: 20px;
+}
+
+.form-body .main .forgot {
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #2B6CB0;
+    margin: 0 0 0 auto;
+}
+
+.form-body .main .forgot:hover {
+    text-decoration: underline;
+}
+
+.form-body .main form label.check {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #2D3748;
+    width: fit-content;
+}
+
+.form-body .main form label.check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.form-body .main form label.check .checkmark {
+    height: 11px;
+    width: 11px;
+    padding: 1px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.form-body .main form label.check:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.form-body .main form label.check input:checked~.checkmark {
+    border: 1px solid #2196F3;
+}
+
+.form-body .main form label.check .checkmark:after {
+    content: "";
+    display: none;
+}
+
+.form-body .main form label.check input:checked~.checkmark:after {
+    display: block;
+}
+
+.form-body .main form label.check .checkmark:after {
+    left: 2px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    background: #2196F3;
+    border-radius: 50%;
+}
+
+.form-body .main .btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+}
+
+.form-body .main .btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+.form-body .main form input[type=submit] {
+    background: #04C45C;
+    margin-bottom: 15px;
+}
+
+.form-body .main .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2D3748;
+}
+
+.form-body .main .btn-google svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px
+}
+
+
+.form-body .last-option {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #000000;
+}
+
+.form-body .last-option span {
+    color: #2B6CB0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-body .last-option span:hover {
+    text-decoration: underline;
+}

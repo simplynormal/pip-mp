@@ -6,8 +6,6 @@ import Home from './components/Home';
 import ProductPage from './components/ProductPage';
 import DetailPage from './components/DetailPage';
 import CheckoutPage from './components/CheckoutPage';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import "../css/NavBar.css"
 import "../css/CheckoutPage.css"
 import p1 from "../database/products/p1.png";
@@ -7,6 +7,7 @@ import { ReactComponent as Logo } from "../assets/logo.svg"
 import { ReactComponent as Account } from "../assets/NavBar/account.svg"
 import { ReactComponent as Minus } from "../assets/CheckoutPage/minus.svg"
 import { ReactComponent as Plus } from "../assets/CheckoutPage/plus.svg"
+import Auth from './Auth';
 
 const items = [
   {
@@ -46,7 +47,7 @@ const items = [
   },
 ]
 
-function Row({ item, setQuantity }) {
+function CartRow({ item, setQuantity }) {
   var quantity = item.quantity
   const [editingQuantity, setEditingQuantity] = React.useState(false)
   const setFilterQuantity = (q) => {
@@ -116,6 +117,7 @@ function Row({ item, setQuantity }) {
 }
 
 export function NavBar() {
+  const [sign, setSign] = React.useState(false)
   const [navItems, setNavItems] = React.useState(items)
   const quantityText = navItems.length > 99 ? "99+" : navItems.length
   var totalPrice = 0
@@ -131,10 +133,10 @@ export function NavBar() {
           <li><a href="/">CONTACT</a></li>
         </ul>
       </nav>
-      <input type="text" placeholder="Search.." />
+      <input className="searchbar" type="text" placeholder="Search.." />
 
       <div className="account">
-        <Account className="suffix" />
+        <Account className="suffix" onClick={() => { setSign(true) }} />
         <div className="account-hover"></div>
       </div>
 
@@ -161,7 +163,7 @@ export function NavBar() {
           <div className="container">
             {navItems.map((item, i) => {
               totalPrice += item.price * item.quantity
-              return <Row key={i} item={item} setQuantity={(q) => {
+              return <CartRow key={i} item={item} setQuantity={(q) => {
                 var temp = navItems.slice(0, navItems.length)
                 temp[i].quantity = q
                 setNavItems(temp)
@@ -177,6 +179,7 @@ export function NavBar() {
           </div>
         </div>
       </div>
+      {sign ? <Auth onClose={() => { setSign(false) }} /> : ""}
     </header >
   )
 }
