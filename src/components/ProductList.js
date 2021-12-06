@@ -22,8 +22,8 @@ const items = [
   {
     name: "Iphone 13",
     image: p1,
-    price: 15000000,
-    perk: ["Hot deal!"]
+    price: 1500000,
+    perk: []
   },
   {
     name: "Iphone 13",
