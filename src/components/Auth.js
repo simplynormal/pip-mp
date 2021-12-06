@@ -7,7 +7,7 @@ const SignUpForm = () => {
   return (
     <form method="post">
       <label className="text">Full Name
-        <input type="text" name="full_name" required />
+        <input type="text" name="name" required />
       </label>
 
       <label className="text">Email

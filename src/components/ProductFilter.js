@@ -46,7 +46,7 @@ function Expansion({ expand }) {
 }
 
 
-function FilterItem({ name, cate }) {
+function FilterItem({ name, cate, chosen, setChosen }) {
   const [expand, setExpand] = React.useState(false)
 
   return (
@@ -81,7 +81,12 @@ function FilterItem({ name, cate }) {
                 key={index}
               >
                 {item}
-                <input type="checkbox" />
+                <input type="checkbox" checked={index === chosen} onChange={() => {
+                  if (index === chosen)
+                    setChosen(-1);
+                  else
+                    setChosen(index)
+                }} />
                 <span className="checkmark"></span>
               </label>
             )
@@ -92,11 +97,11 @@ function FilterItem({ name, cate }) {
   )
 }
 
-function PriceFilter() {
+function PriceFilter({ price, setPrice }) {
   const [expand, setExpand] = React.useState(true)
-  var fromPar = React.useRef(null)
+  var fromPar = price.from === "" ? "field-wrapper" : "field-wrapper hasValue"
   var fromRef = React.useRef(null)
-  var toPar = React.useRef(null)
+  var toPar = price.to === "" ? "field-wrapper" : "field-wrapper hasValue"
   var toRef = React.useRef(null)
 
   const filterInput = (s) => {
@@ -124,19 +129,15 @@ function PriceFilter() {
         duration={EXPAND_TRANSITION}
       >
         <div className="form-wrapper-outer">
-          <div className="field-wrapper hasValue" ref={fromPar}>
+          <div className={fromPar}>
             <input
               ref={fromRef}
               type="text"
-              defaultValue="MIN"
+              value={price.from}
               onChange={(e) => {
                 e.target.value = filterInput(e.target.value)
                 var value = e.target.value
-                if (value !== "") {
-                  fromPar.current.className = "field-wrapper hasValue"
-                } else {
-                  fromPar.current.className = "field-wrapper"
-                }
+                setPrice({ from: value, to: price.to })
               }}
             />
             <div
@@ -146,23 +147,18 @@ function PriceFilter() {
             <u>đ</u>
             <button
               onClick={() => {
-                fromPar.current.className = "field-wrapper hasValue"
-                fromRef.current.value = "MIN"
+                setPrice({ from: "MIN", to: price.to })
               }}>min</button>
           </div>
-          <div className="field-wrapper hasValue" ref={toPar}>
+          <div className={toPar}>
             <input
               ref={toRef}
               type="text"
-              defaultValue="MAX"
+              value={price.to}
               onChange={(e) => {
                 e.target.value = filterInput(e.target.value)
                 var value = e.target.value
-                if (value !== "") {
-                  toPar.current.className = "field-wrapper hasValue"
-                } else {
-                  toPar.current.className = "field-wrapper"
-                }
+                setPrice({ from: price.from, to: value })
               }}
             />
             <div
@@ -172,8 +168,7 @@ function PriceFilter() {
             <u>đ</u>
             <button
               onClick={() => {
-                toPar.current.className = "field-wrapper hasValue"
-                toRef.current.value = "MAX"
+                setPrice({ from: price.from, to: "MAX" })
               }}
             >max</button>
           </div>
@@ -183,28 +178,12 @@ function PriceFilter() {
   )
 }
 
-function SubmitOrClear() {
-  return (
-    <div
-      className="field-wrapper"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      <button className="big-btn"
-      >Apply</button>
-      <button className="big-btn"
-      >Clear</button>
-    </div>
-  )
-}
-
 function ProductFilter() {
   const fetchFilters = () => {
     return filter
   }
+  const [chosenList, setChosenList] = React.useState(Array(fetchFilters().length).fill(-1))
+  const [price, setPrice] = React.useState({ from: "MIN", to: "MAX" })
 
   return (
     <div className="filter">
@@ -215,10 +194,36 @@ function ProductFilter() {
         FILTER OPTIONS
       </div>
       {fetchFilters().map((item, index) => {
-        return <FilterItem name={item.name} cate={item.cate} key={index} />
+        return <FilterItem
+          name={item.name}
+          cate={item.cate}
+          key={index}
+          chosen={chosenList[index]}
+          setChosen={(i) => {
+            var temp = chosenList.slice(0, chosenList.length)
+            temp[index] = i
+            setChosenList(temp)
+          }}
+        />
       })}
-      <PriceFilter />
-      <SubmitOrClear />
+      <PriceFilter price={price} setPrice={setPrice} />
+      <div
+        className="field-wrapper"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <button className="big-btn"
+        >Apply</button>
+        <button className="big-btn"
+          onClick={() => {
+            setChosenList(Array(fetchFilters().length).fill(-1))
+            setPrice({ from: "MIN", to: "MAX" })
+          }}
+        >Clear</button>
+      </div>
     </div>
   )
 }

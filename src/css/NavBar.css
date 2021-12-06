@@ -62,7 +62,7 @@ header {
 }
 
 header input[type=text].searchbar {
-    width: 20vw;
+    width: 15vw;
     margin: 0 20px 0 auto;
     padding: 6px;
     font-size: 17px;
@@ -75,11 +75,15 @@ header input[type=text].searchbar {
     padding-left: 35px;
     background-color: #606060;
     color: white;
-    transition: all 0.3s ease 0s;
 }
 
 header input[type=text].searchbar::placeholder {
     color: white;
+}
+
+header input[type=text],
+header input[type=password] {
+    transition: all 0.2s ease 0s;
 }
 
 header input[type=text]:focus,
