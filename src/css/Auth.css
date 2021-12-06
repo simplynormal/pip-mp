@@ -164,8 +164,6 @@
 }
 
 .form-body .main form label.check .checkmark:after {
-    left: 2px;
-    top: 6px;
     width: 7px;
     height: 7px;
     background: #2196F3;

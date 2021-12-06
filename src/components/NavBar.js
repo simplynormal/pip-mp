@@ -117,7 +117,7 @@ function CartRow({ item, setQuantity }) {
 }
 
 export function NavBar() {
-  const [sign, setSign] = React.useState(false)
+  const [sign, setSign] = React.useState(0)
   const [navItems, setNavItems] = React.useState(items)
   const quantityText = navItems.length > 99 ? "99+" : navItems.length
   var totalPrice = 0
@@ -136,8 +136,11 @@ export function NavBar() {
       <input className="searchbar" type="text" placeholder="Search.." />
 
       <div className="account">
-        <Account className="suffix" onClick={() => { setSign(true) }} />
-        <div className="account-hover"></div>
+        <Account className="suffix" onClick={() => { setSign(1) }} />
+        <div className="account-hover">
+          <div className="row" onClick={() => { setSign(1) }}>Sign In</div>
+          <div className="row" onClick={() => { setSign(2) }}>Sign Up</div>
+        </div>
       </div>
 
       <div className="cart">
@@ -171,7 +174,7 @@ export function NavBar() {
             })}
           </div>
           <svg className="divider" style={{ margin: "10px auto" }}>
-            <line y1="1" x2="480" y2="1" stroke="#ABABAB" stroke-width="2" />
+            <line y1="1" x2="480" y2="1" stroke="#ABABAB" strokeWidth="2" />
           </svg>
           <div className="last-row">
             <p className="total-label">Total cost: &nbsp; &nbsp; <span>{numberWithCommas(totalPrice)} <u>đ</u></span></p>
@@ -179,7 +182,7 @@ export function NavBar() {
           </div>
         </div>
       </div>
-      {sign ? <Auth onClose={() => { setSign(false) }} /> : ""}
+      {sign ? <Auth onClose={() => { setSign(0) }} signingIn={sign === 1} /> : ""}
     </header >
   )
 }
