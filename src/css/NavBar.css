@@ -159,7 +159,7 @@ header input[type=password]:focus {
 }
 
 .cart-hover .container {
-    height: 350px;
+    max-height: 350px;
     overflow-y: scroll;
 }
 
