@@ -11,4 +11,12 @@ export function perkTranslate(name) {
     "--perk-background": "#ECF7ED",
     "--perk-color": "#37833B"
   }
+  if (name === "Coupon") return {
+    "--perk-background": "#e3f4ff",
+    "--perk-color": "#0078c2"
+  }
 }
+
+// export const baseURL = "https://pip-3103.herokuapp.com"
+export const baseURL = "http://127.0.0.1:8000"
+export const apiURL = "/api/v1"

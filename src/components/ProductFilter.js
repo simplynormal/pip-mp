@@ -1,34 +1,7 @@
 import React from 'react'
 import '../css/ProductFilter.css'
 import Expand from "react-expand-animated"
-import { numberWithCommas } from './Common'
-
-const filter = [
-  {
-    name: "Brand",
-    cate: ["Apple", "Samsung", "Oppo", "Xiaomi"]
-  },
-  {
-    name: "RAM",
-    cate: ["4GB", "8GB", "16GB", "32GB"]
-  },
-  {
-    name: "Camera",
-    cate: ["1MP", "2MP", "5MP", "10MP", "12MP"]
-  },
-  {
-    name: "Screen",
-    cate: ["4 - 5 inch", "5 - 6 inch", "6 - 7 inch"]
-  },
-  {
-    name: "Storage",
-    cate: ["64GB", "128GB", "256GB", "512GB"]
-  },
-  {
-    name: "Year Manufacture",
-    cate: ["2015", "2016", "2017", "2018", "2019", "2020", "2021"]
-  },
-]
+import { numberWithCommas, baseURL, apiURL } from './Common'
 
 const EXPAND_TRANSITION = 200
 
@@ -179,10 +152,14 @@ function PriceFilter({ price, setPrice }) {
 }
 
 function ProductFilter() {
-  const fetchFilters = () => {
-    return filter
-  }
-  const [chosenList, setChosenList] = React.useState(Array(fetchFilters().length).fill(-1))
+  const [filter, setFilter] = React.useState([])
+  React.useEffect(() => {
+    fetch(baseURL + apiURL + "/product/filter_list")
+      .then(response => response.json())
+      .then(data => setFilter(data));
+  }, []);
+
+  const [chosenList, setChosenList] = React.useState(Array(filter.length).fill(-1))
   const [price, setPrice] = React.useState({ from: "MIN", to: "MAX" })
 
   return (
@@ -193,10 +170,10 @@ function ProductFilter() {
         </svg>
         FILTER OPTIONS
       </div>
-      {fetchFilters().map((item, index) => {
+      {filter.map((item, index) => {
         return <FilterItem
           name={item.name}
-          cate={item.cate}
+          cate={item.data}
           key={index}
           chosen={chosenList[index]}
           setChosen={(i) => {
@@ -216,10 +193,24 @@ function ProductFilter() {
         }}
       >
         <button className="big-btn"
+          onClick={() => {
+            var params = ''
+            chosenList.forEach((chosen, i) => {
+              if (chosen !== -1) {
+                params += `${filter[i].name.toLowerCase()}=${filter[i].data[chosen]}&`
+              }
+            })
+            if (price.from !== 'MIN') params += `fromPrice=${price.from}&`
+            if (price.to !== 'MAX') params += `toPrice=${price.to}&`
+            if (params !== '') {
+              params = params.slice(0, params.length - 1)
+              window.location.href = '/products?' + params
+            }
+          }}
         >Apply</button>
         <button className="big-btn"
           onClick={() => {
-            setChosenList(Array(fetchFilters().length).fill(-1))
+            setChosenList(Array(filter.length).fill(-1))
             setPrice({ from: "MIN", to: "MAX" })
           }}
         >Clear</button>

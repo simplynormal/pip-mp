@@ -1,55 +1,8 @@
 import React from 'react'
 import '../css/ProductList.css'
 
-import { numberWithCommas, perkTranslate } from './Common';
-
-import p1 from "../database/products/p1.png";
+import { numberWithCommas, perkTranslate, baseURL, apiURL } from './Common';
 import { ReactComponent as Cart } from "../assets/ProductPage/cart.svg"
-
-const items = [
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 15000000,
-    perk: ["Hot deal!"]
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 15000000,
-    perk: ["Hot deal!", "50% OFF"]
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 1500000,
-    perk: []
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 15000000,
-    perk: ["Hot deal!"]
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 15000000,
-    perk: ["Hot deal!"]
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 15000000,
-    perk: ["Hot deal!"]
-  },
-]
-const filters = [
-  "Any brand",
-  "above $1050",
-  "2015-2021",
-  "Sample",
-]
 
 function Options() {
   return (
@@ -58,8 +11,6 @@ function Options() {
         <select>
           <option value="1">Price Ascending</option>
           <option value="2">Price Descending</option>
-          <option value="3">Latest</option>
-          <option value="4">Oldest</option>
         </select>
         <div className="field-wrapper">sort by</div>
       </div>
@@ -89,7 +40,7 @@ export function Item({ item }) {
       className="product-item no-select"
       onClick={() => window.location.href = '/detail'}
     >
-      <img src={item.image} alt="p1" />
+      <img src={baseURL + item.image} alt="p1" />
       <p className="product-text" >{item.name}</p>
       <div className="perk-container">
         {item.perk.map((name, i) => {
@@ -113,13 +64,33 @@ export function Item({ item }) {
 }
 
 function ProductList() {
-  const fetchItems = () => {
-    return items
+  const [items, setItems] = React.useState([])
+  var filters
+  var url = baseURL + apiURL
+  var params = new URLSearchParams(window.location.search)
+
+  if (params.has('search')) {
+    var newArr = params.get('search').split(' ')
+    filters = newArr
+    url += "/product/search?key=" + params.get('search').replace(' ', '+')
+  } else if (window.location.search !== '') {
+    filters = []
+    params.forEach((value, key) => {
+      filters.push(`${key}: ${value}`)
+    })
+    url += '/product/filter' + window.location.search
+  } else {
+    filters = []
+    url += '/product/all'
   }
 
-  const fetchFilters = () => {
-    return filters
-  }
+  React.useEffect(() => {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => setItems(data));
+  }, []);
+
+
 
   return (
     <div className="products">
@@ -127,12 +98,12 @@ function ProductList() {
         <Options />
         <div className="filter-label">
           <p>Filter</p>
-          {fetchFilters().map((name, i) => {
+          {filters.map((name, i) => {
             return <div key={i} >{name}</div>
           })}
         </div>
         <div className="list-container">
-          {fetchItems().map((item, i) => {
+          {items.map((item, i) => {
             return (
               <Item item={item} key={i} />
             )

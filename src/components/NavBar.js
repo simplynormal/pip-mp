@@ -120,6 +120,7 @@ export function NavBar() {
   const [sign, setSign] = React.useState(0)
   const [navItems, setNavItems] = React.useState(items)
   const quantityText = navItems.length > 99 ? "99+" : navItems.length
+  var search = ''
   var totalPrice = 0
 
   return (
@@ -133,7 +134,15 @@ export function NavBar() {
           <li><a href="/">CONTACT</a></li>
         </ul>
       </nav>
-      <input className="searchbar" type="text" placeholder="Search.." />
+      <input className="searchbar" type="text" placeholder="Search.."
+        onChange={(e) => {
+          search = e.target.value
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && search !== '') {
+            window.location.href = '/products?search=' + search.replace(" ", "+");
+          }
+        }} />
 
       <div className="account">
         <Account className="suffix" onClick={() => { setSign(1) }} />
