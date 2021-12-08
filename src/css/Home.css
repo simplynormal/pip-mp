@@ -115,39 +115,48 @@
     grid-auto-rows: calc((var(--screen-width) - 2 * var(--padding-lr) - 5 * (var(--gap-size))) / 6);
 }
 
-.products-grid div {
+.products-grid .grid-item {
     background-color: var(--secondary-background-color);
+    width: 100%;
+    height: 100%;
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     overflow: hidden;
 }
 
-.products-grid div img {
+.products-grid .grid-item img {
     height: 80%;
+    width: auto;
 }
 
-.products-grid div div {
+.products-grid .grid-item .desc {
     font-family: "Inter";
     display: block;
-    --size: calc((var(--screen-width) - 2 * var(--padding-lr) - 5 * (var(--gap-size))) / 6);
     position: absolute;
-    margin-top: calc(var(--size) / 2);
-    height: calc(var(--size) / 2);
-    width: var(--size);
+    bottom: 0;
+    width: 100%;
     padding: 12px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 11px;
+    font-size: 12px;
     transform: translateY(100%);
     opacity: 0;
     transition: all 0.3s ease 0s;
     z-index: -1;
+    letter-spacing: 0.5px;
 }
 
-.products-grid div div p {
-    position: absolute;
+.products-grid .grid-item:hover .desc {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 1;
+}
+
+.products-grid .grid-item .desc p {
     bottom: 15px;
+    margin-top: 10px;
     font-weight: bold;
 }

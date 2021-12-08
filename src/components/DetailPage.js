@@ -1,47 +1,43 @@
 import React from 'react'
 import '../css/DetailPage.css'
 import { Item as ProductItem } from './ProductList'
-import p1 from "../database/products/p1.png";
-import { numberWithCommas } from './Common';
+import { numberWithCommas, baseURL, apiURL } from './Common';
 
-const item = {
-  name: "iPhone 13 Pro",
-  image: p1,
-  price: 15000000,
-  perk: ["Hot deal!"],
-  shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+function convertColor(color) {
+  if (color === 'red') return '#CB2032'
+  if (color === 'blue') return '#1F4D78'
+  if (color === 'red') return '#CB2032'
+  if (color === 'yellow') return '#D6AC19'
+  return color
 }
 
-const choices = ["128GB", "256GB", "512GB"]
-const colors = ["white", "#CB2032", "#1F4D78", "#D6AC19"]
-const specs = {
-  screen: "6.1”, OLED, Super Retina XDR, ProMotion 120Hz",
-  camera: "3 cameras 12 MP, LiDAR sensor",
-  battery: "Up to 22 hours",
-  ram: "4GB",
-  material: "Stainless Steel, Ceramic Shield",
-}
-
-const brand = {
-  name: "Apple",
-  desc: "Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services. Apple is the world's largest technology company by revenue and valuable."
-}
 
 function DetailPage() {
+  const [item, setItem] = React.useState(null)
+  const [related, setRelated] = React.useState([])
   const choicesRef = React.useRef([]);
   const colorsRef = React.useRef([]);
 
-  React.useEffect(() => {
-    choicesRef.current = choicesRef.current.slice(0, choices.length);
-    choicesRef.current[0].className = "active"
-  });
 
   React.useEffect(() => {
-    colorsRef.current = colorsRef.current.slice(0, colors.length);
-    colorsRef.current[0].className = "active"
-  });
+    fetch(baseURL + apiURL + '/product/detail' + window.location.search)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setItem(data)
+        choicesRef.current = choicesRef.current.slice(0, data.storage.length);
+        choicesRef.current[0].className = "active"
+        colorsRef.current = colorsRef.current.slice(0, data.color.length);
+        colorsRef.current[0].className = "active"
+      })
 
-  return (
+
+    fetch(baseURL + apiURL + '/product/related')
+      .then(response => response.json())
+      .then(data => setRelated(data));
+  }, []);
+
+  return item ? (
     <div className="detail-container">
       <div className="frame-container">
         <div className="main-frame no-select">
@@ -49,7 +45,7 @@ function DetailPage() {
             <svg className="nav-arrow left">
               <path d="M17 2L3 16L17 30" stroke="#727272" strokeOpacity="0.8" strokeWidth="3" />
             </svg>
-            <img src={item.image} alt={item.name} />
+            <img src={baseURL + item.image} alt={item.name} />
             <svg className="nav-arrow right">
               <path d="M2 2L16 16L2 30" stroke="#727272" strokeOpacity="0.8" strokeWidth="3" />
             </svg>
@@ -57,9 +53,9 @@ function DetailPage() {
           <div className="description">
             <h1 className="name-desc">{item.name}</h1>
             <h2 className="price-desc">{numberWithCommas(item.price)} <u>đ</u></h2>
-            <p className="short-desc">{item.shortDesc}</p>
+            <p className="short-desc">{item.desc}</p>
             <div className="choices">
-              {choices.map((name, i) => {
+              {item.storage.map((name, i) => {
                 return <button
                   key={i}
                   ref={el => choicesRef.current[i] = el}
@@ -70,11 +66,11 @@ function DetailPage() {
               })}
             </div>
             <div className="colors">
-              {colors.map((color, i) => {
+              {item.color.map((color, i) => {
                 return <button
                   key={i}
                   ref={el => colorsRef.current[i] = el}
-                  style={{ background: color }}
+                  style={{ background: convertColor(color) }}
                   onClick={() => {
                     colorsRef.current.forEach((item, index) => { item.className = index === i ? "active" : "" }, colorsRef.current)
                   }}
@@ -103,46 +99,46 @@ function DetailPage() {
         <div className="second-frame">
           <div>
             <div className="brand-desc">
-              <h1>About {brand.name}</h1>
-              <p>{brand.desc}</p>
+              <h1>About {item.brand.name}</h1>
+              <p>{item.brand.desc}</p>
             </div>
           </div>
           <div>
             <table id="customers">
-              <tr>
-                <th>Screen</th>
-                <td>{specs.screen}</td>
-              </tr>
-              <tr>
-                <th>Camera</th>
-                <td>{specs.camera}</td>
-              </tr>
-              <tr>
-                <th>Battery</th>
-                <td>{specs.battery}</td>
-              </tr>
-              <tr>
-                <th>RAM</th>
-                <td>{specs.ram}</td>
-              </tr>
-              <tr>
-                <th>Material</th>
-                <td>{specs.material}</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th>Screen</th>
+                  <td>{item.screen}</td>
+                </tr>
+                <tr>
+                  <th>Camera</th>
+                  <td>{item.camera}</td>
+                </tr>
+                <tr>
+                  <th>Battery</th>
+                  <td>{item.battery}</td>
+                </tr>
+                <tr>
+                  <th>RAM</th>
+                  <td>{item.ram}</td>
+                </tr>
+                <tr>
+                  <th>Material</th>
+                  <td>{item.material}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
       </div>
       <h1 className="related-label">RELATED PRODUCTS</h1>
       <div className="related-container">
-        <ProductItem item={item} />
-        <ProductItem item={item} />
-        <ProductItem item={item} />
-        <ProductItem item={item} />
-        <ProductItem item={item} />
+        {related.map((item, i) => {
+          return <ProductItem key={i} item={item} />;
+        })}
       </div>
     </div >
-  )
+  ) : ""
 }
 
 export default DetailPage

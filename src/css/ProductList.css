@@ -109,10 +109,16 @@
     grid-gap: 10px;
 }
 
+.item-href {
+    text-decoration: none;
+    color: unset;
+}
 
 .product-item {
     position: relative;
     background: var(--secondary-background-color);
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

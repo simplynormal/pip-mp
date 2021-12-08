@@ -25,9 +25,6 @@ function Options() {
       <div className="outer-wrapper">
         <select>
           <option value="0">Delivery options</option>
-          <option value="1">Price Ascending</option>
-          <option value="2">BMW</option>
-          <option value="3">Citroen</option>
         </select>
       </div>
     </div>
@@ -36,30 +33,29 @@ function Options() {
 
 export function Item({ item }) {
   return (
-    <div
-      className="product-item no-select"
-      onClick={() => window.location.href = '/detail'}
-    >
-      <img src={baseURL + item.image} alt="p1" />
-      <p className="product-text" >{item.name}</p>
-      <div className="perk-container">
-        {item.perk.map((name, i) => {
-          return (
-            <div key={i} style={perkTranslate(name)}>{name}</div>)
-        })}
+    <a className="item-href" href={"/detail?uuid=" + item.uuid}>
+      <div className="product-item">
+        <img src={baseURL + item.image} alt="p1" />
+        <p className="product-text" >{item.name}</p>
+        <div className="perk-container">
+          {item.perk.map((name, i) => {
+            return (
+              <div key={i} style={perkTranslate(name)}>{name}</div>)
+          })}
+        </div>
+        <div className="item-footer">
+          <p className="product-text" style={{
+            fontWeight: "bold",
+          }}>
+            {numberWithCommas(item.price)} <u>đ</u>
+          </p>
+          <button className="add-cart">
+            <Cart className="cart-logo" />
+            Add to cart
+          </button>
+        </div>
       </div>
-      <div className="item-footer">
-        <p className="product-text" style={{
-          fontWeight: "bold",
-        }}>
-          {numberWithCommas(item.price)} <u>đ</u>
-        </p>
-        <button className="add-cart">
-          <Cart className="cart-logo" />
-          Add to cart
-        </button>
-      </div>
-    </div>
+    </a>
   )
 }
 
@@ -88,9 +84,7 @@ function ProductList() {
     fetch(url)
       .then(response => response.json())
       .then(data => setItems(data));
-  }, []);
-
-
+  }, [url]);
 
   return (
     <div className="products">
@@ -102,7 +96,7 @@ function ProductList() {
             return <div key={i} >{name}</div>
           })}
         </div>
-        <div className="list-container">
+        <div className="list-container no-select">
           {items.map((item, i) => {
             return (
               <Item item={item} key={i} />

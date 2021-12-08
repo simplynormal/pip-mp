@@ -89,9 +89,10 @@
 }
 
 .main-frame .description .choices {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 90px);
-    grid-auto-rows: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .main-frame .description .choices button {
@@ -107,10 +108,10 @@
     color: #FFFFFF;
     background: #9B9B9B;
     border-radius: 5px;
+    margin-inline: 15px;
     padding: 7px;
     height: 35px;
     width: fit-content;
-    margin: auto;
     cursor: pointer;
     border: none;
     transition: all 0.2s ease 0s;
