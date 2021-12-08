@@ -6,10 +6,14 @@ import { ReactComponent as GoogleLogo } from '../assets/Google_Logo.svg'
 const SignUpForm = () => {
   return (
     <form method="post">
-      <label className="text">Full Name
-        <input type="text" name="name" required />
-      </label>
-
+      <div className="inline" style={{ margin: 0 }}>
+        <label className="text" style={{ marginRight: '5px' }}>First Name
+          <input type="text" name="first_name" required />
+        </label>
+        <label className="text" style={{ marginLeft: '5px' }}>Last Name
+          <input type="text" name="last_name" required />
+        </label>
+      </div>
       <label className="text">Email
         <input type="text" name="email" required />
       </label>
