@@ -82,6 +82,11 @@
     color: #4A5568;
 }
 
+.form-body .main form label.text span {
+    color: red;
+    font-size: 12px;
+}
+
 .form-body .main form label.text input[type=text],
 .form-body .main form label.text input[type=password] {
     width: 100%;

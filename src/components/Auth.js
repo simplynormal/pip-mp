@@ -2,10 +2,71 @@ import React from 'react'
 import '../css/Auth.css'
 
 import { ReactComponent as GoogleLogo } from '../assets/Google_Logo.svg'
+import { apiURL, baseURL } from './Common'
 
-const SignUpForm = () => {
+const SignUpForm = ({ setSignIn }) => {
+  const [error, setError] = React.useState({ email: false, phone: false, password: false })
+  const [password, setPassword] = React.useState('')
+  const [confirm_password, setConfirmPassword] = React.useState('')
+  var agree = true
+
   return (
-    <form method="post">
+    <form onSubmit={(e) => {
+      e.preventDefault()
+      if (!agree) {
+        alert('You must agree to our Terms of Service to continue')
+        return
+      }
+
+      if (password !== confirm_password) {
+        alert('Passwords do not match')
+        setError({ email: false, phone: false, password: true })
+        return
+      }
+
+      var params = {}
+      for (let i = 0; i < e.target.length; i++) {
+        if (e.target[i].name !== '' && e.target[i].name !== 'confirm_password')
+          params[e.target[i].name] = e.target[i].value
+      }
+
+      fetch(baseURL + apiURL + '/account/signup', {
+        method: 'POST',
+        body: JSON.stringify(params),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            console.log(response);
+            // create error object and reject if not a 2xx response code
+            let err = new Error('HTTP Status Code ' + response.status)
+            err.data = response.json()
+            err.status = response.status
+            throw err
+          }
+          return response.json()
+        })
+        .catch(err => err.data.then(
+          data => {
+            var errorTemp = { password: false }
+
+            var message = ""
+            for (let [key, value] of Object.entries(data)) {
+              message += value += "\n"
+              errorTemp[key] = true
+            }
+            alert(message)
+            setError(errorTemp)
+          }
+        ))
+        .then(() => {
+          alert('Account created successfully')
+          setSignIn(true)
+        })
+    }}
+    >
       <div className="inline" style={{ margin: 0 }}>
         <label className="text" style={{ marginRight: '5px' }}>First Name
           <input type="text" name="first_name" required />
@@ -14,26 +75,29 @@ const SignUpForm = () => {
           <input type="text" name="last_name" required />
         </label>
       </div>
-      <label className="text">Email
+      <label className="text">Email {error.email ? <span>&nbsp; * Email already registered</span> : ""}
         <input type="text" name="email" required />
       </label>
 
-      <label className="text">Phone
+      <label className="text">Phone {error.phone ? <span>&nbsp; * Phone already registered</span> : ""}
         <input type="text" name="phone" required />
       </label>
 
       <label className="text">Password
-        <input type="password" name="password" required />
+        <input type="password" name="password" onChange={e => setPassword(e.target.value)} required />
       </label>
 
-      <label className="text">Confirm Password
-        <input type="password" name="password" required />
+      <label className="text">Confirm Password {error.password ? <span>&nbsp; * Passwords do not match</span> : ""}
+        <input type="password" onChange={e => setConfirmPassword(e.target.value)} required />
       </label>
 
       <div className="inline">
         <label className="check">
-          <input type="checkbox" />
-          <span class="checkmark"></span>
+          <input type="checkbox"
+            defaultChecked={true}
+            onChange={(e) => agree = e.target.checked}
+          />
+          <span className="checkmark"></span>
           I agree to the M&P Terms of Service and Privacy Policy.
         </label>
       </div>
@@ -80,7 +144,7 @@ export const Auth = ({ onClose, signingIn }) => {
         <div className="main">
           <h2>welcome</h2>
           <h1>{signIn ? "Login to your account" : "Create a new account"}</h1>
-          {signIn ? <SignInForm /> : <SignUpForm />}
+          {signIn ? <SignInForm /> : <SignUpForm setSignIn={setSignIn} />}
           {signIn ? <button className="btn btn-google">
             <GoogleLogo />
             Or sign-in with google
