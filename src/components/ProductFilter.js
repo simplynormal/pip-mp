@@ -200,8 +200,8 @@ function ProductFilter() {
                 params += `${filter[i].name.toLowerCase()}=${filter[i].data[chosen]}&`
               }
             })
-            if (price.from !== 'MIN') params += `fromPrice=${price.from}&`
-            if (price.to !== 'MAX') params += `toPrice=${price.to}&`
+            if (price.from !== 'MIN') params += `fromPrice=${price.from.replaceAll(',', '')}&`
+            if (price.to !== 'MAX') params += `toPrice=${price.to.replaceAll(',', '')}&`
             if (params !== '') {
               params = params.slice(0, params.length - 1)
               window.location.href = '/products?' + params
