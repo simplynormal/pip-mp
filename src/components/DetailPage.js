@@ -178,7 +178,7 @@ function DetailPage({ setSign, setReset }) {
       <h1 className="related-label">RELATED PRODUCTS</h1>
       <div className="related-container">
         {related.map((item, i) => {
-          return <ProductItem key={i} item={item} />;
+          return <ProductItem key={i} item={item} setSign={setSign} setReset={setReset} />;
         })}
       </div>
     </div >
