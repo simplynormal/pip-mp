@@ -135,6 +135,8 @@ const CheckoutPage = ({ setSign }) => {
 
   const access_token = checkAccess()
 
+  var address = ''
+
   React.useEffect(() => {
     axios.post(baseURL + apiURL + '/cart/cart', {
       access_token: Cookies.get('accesstoken')
@@ -222,7 +224,9 @@ const CheckoutPage = ({ setSign }) => {
             <div className="single-row" key={4}>
               <House />
               <h2>Address: </h2>
-              <input type="text" className="text-place" placeholder="Enter your address..." />
+              <input type="text" className="text-place" placeholder="Enter your address..." onChange={(e) => {
+                address = e.target.value
+              }} />
             </div>,
           ] : ""}
         <svg className="divider">
@@ -252,13 +256,21 @@ const CheckoutPage = ({ setSign }) => {
           bottom: "40px"
         }}
           onClick={() => {
+            if (address === '') {
+              alert('Please enter address')
+              return
+            }
+
             axios.delete(baseURL + apiURL + '/cart/checkout', {
               data: {
                 access_token: Cookies.get('accesstoken')
               }
             })
               .then(response => {
-                if (response.status === 200) window.location.href = '/products'
+                if (response.status === 200) {
+                  alert('Success simulation!')
+                  window.location.href = '/products'
+                }
               })
           }}
         >Proceed</button>
