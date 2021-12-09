@@ -80,7 +80,9 @@ function Home() {
                 <img src={baseURL + p.image} alt={p.name} ></img>
                 <div className="desc">
                   {p.name}
-                  <p>{numberWithCommas(p.price)} <u>đ</u></p>
+                  {p.price > 0 ?
+                    <p>{numberWithCommas(p.price)} <u>đ</u></p> :
+                    <p>{p.price === -1 ? 'Out of stock' : 'Contact'}</p>}
                 </div>
               </div>
             </a>
