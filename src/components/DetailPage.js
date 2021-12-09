@@ -41,7 +41,7 @@ function DetailPage({ setSign, setReset }) {
   return item ? (
     <div className="detail-container">
       <div className="frame-container">
-        <div className="main-frame no-select">
+        <div className="main-frame">
           <div className="detail-img-wrapper">
             <svg className="nav-arrow left">
               <path d="M17 2L3 16L17 30" stroke="#727272" strokeOpacity="0.8" strokeWidth="3" />
