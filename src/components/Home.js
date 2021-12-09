@@ -21,7 +21,7 @@ function Home() {
   const brands = [
     {
       name: "APPLE",
-      image: apple
+      image: apple,
     },
     {
       name: "SAMSUNG",
@@ -61,14 +61,20 @@ function Home() {
         gridAutoRows: "200px"
       }}>
         {brands.map((b, index) => {
-          return <div
-            key={index}
-            className={`brand brand-${index + 1} no-select`}
-            style={{
-              backgroundImage: `url(${b.image})`,
-              backgroundPosition: "10% 40%"
-            }}
-          >{b.name}</div>
+          return (
+            <div
+              key={index}
+              className={`brand brand-${index + 1} no-select`}
+              style={{
+                backgroundImage: `url(${b.image})`,
+                backgroundPosition: "10% 40%"
+              }}
+              onClick={() => {
+                var url = '/products' + (b.name !== 'OTHERS' ? '?brand=' + b.name : '')
+                window.location.href = url
+              }}
+            >{b.name}</div>
+          )
         })}
       </section>
       <div className="label">POPULAR PRODUCTS</div>
