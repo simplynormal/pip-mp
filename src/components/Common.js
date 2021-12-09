@@ -29,6 +29,6 @@ export function checkAccess() {
   } else return false
 }
 
-// export const baseURL = "https://pip-3103.herokuapp.com"
-export const baseURL = "http://127.0.0.1:8000"
+export const baseURL = "https://pip-3103.herokuapp.com"
+// export const baseURL = "http://127.0.0.1:8000"
 export const apiURL = "/api/v1"

@@ -135,7 +135,7 @@ const CheckoutPage = ({ setSign }) => {
 
   const access_token = checkAccess()
 
-  var address = ''
+  var [address, setAddress] = React.useState('')
 
   React.useEffect(() => {
     axios.post(baseURL + apiURL + '/cart/cart', {
@@ -225,7 +225,7 @@ const CheckoutPage = ({ setSign }) => {
               <House />
               <h2>Address: </h2>
               <input type="text" className="text-place" placeholder="Enter your address..." onChange={(e) => {
-                address = e.target.value
+                setAddress(e.target.value)
               }} />
             </div>,
           ] : ""}
