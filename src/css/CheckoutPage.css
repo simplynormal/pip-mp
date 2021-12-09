@@ -274,7 +274,7 @@
     margin-right: 135px;
 }
 
-.single-row div {
+.single-row .text-place {
     width: 70%;
     height: 59px;
     background: #FFFFFF;
@@ -284,12 +284,16 @@
     font-style: normal;
     font-weight: 500;
     font-size: 25px;
-    line-height: 96%;
     display: flex;
     align-items: center;
     letter-spacing: 0.44px;
     color: #474747;
     padding: 0 25px;
+}
+
+.single-row input[type="text"].text-place {
+    text-align: start;
+    border: none;
 }
 
 .method-container {

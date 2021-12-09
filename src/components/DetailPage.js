@@ -53,7 +53,12 @@ function DetailPage({ setSign, setReset }) {
           </div>
           <div className="description">
             <h1 className="name-desc">{item.name}</h1>
-            <h2 className="price-desc">{numberWithCommas(item.price)} <u>đ</u></h2>
+            {item.price > 0 ?
+              <h2 className="price-desc">{numberWithCommas(item.price)} <u>đ</u></h2> :
+              <h2
+                className="price-desc"
+                style={{ color: 'red' }}
+              >{item.price === -1 ? 'Out of stock' : 'Contact for more'} </h2>}
             <p className="short-desc">{item.desc}</p>
             <div className="choices">
               {item.storage.map((name, i) => {

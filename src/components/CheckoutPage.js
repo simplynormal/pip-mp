@@ -7,6 +7,7 @@ import { ReactComponent as Plus } from "../assets/CheckoutPage/plus.svg"
 import { ReactComponent as User } from "../assets/CheckoutPage/user.svg"
 import { ReactComponent as Phone } from "../assets/CheckoutPage/phone.svg"
 import { ReactComponent as House } from "../assets/CheckoutPage/house.svg"
+import { ReactComponent as Email } from "../assets/CheckoutPage/email.svg"
 import { ReactComponent as ApplePay } from "../assets/CheckoutPage/applePay.svg"
 import { ReactComponent as GooglePay } from "../assets/CheckoutPage/googlePay.svg"
 import { ReactComponent as Paypal } from "../assets/CheckoutPage/paypal.svg"
@@ -130,6 +131,7 @@ const CheckoutPage = ({ setSign }) => {
   const titles = ["Image", "Product name", "Price / Product", "Total price", "Quantity"]
   const [methodID, setMethodID] = React.useState(0)
   const [items, setItems] = React.useState(null)
+  const [account, setAccount] = React.useState(null)
 
   const access_token = checkAccess()
 
@@ -142,6 +144,13 @@ const CheckoutPage = ({ setSign }) => {
         if (err.response.status === 401)
           setItems([])
       })
+
+    axios.post(baseURL + apiURL + '/account/me', {
+      access_token: Cookies.get('accesstoken')
+    })
+      .then(response => setAccount(response.data))
+      .catch(err => console.log(err.response.data))
+
   }, [access_token]);
 
   var totalPrice = 0
@@ -193,21 +202,29 @@ const CheckoutPage = ({ setSign }) => {
         marginTop: "0",
         padding: "35px 0 100px 0"
       }}>
-        <div className="single-row">
-          <User />
-          <h2>User: </h2>
-          <div>Lastname Midname Firstname</div>
-        </div>
-        <div className="single-row">
-          <Phone />
-          <h2>Phone: </h2>
-          <div>0969696969</div>
-        </div>
-        <div className="single-row">
-          <House />
-          <h2>Address: </h2>
-          <div>6-9 Cool Street, Cool Sub-district, Cool District.</div>
-        </div>
+        {account ?
+          [
+            <div className="single-row" key={1}>
+              <User />
+              <h2>User: </h2>
+              <div className="text-place">{account.first_name + ' ' + account.last_name}</div>
+            </div>,
+            <div className="single-row" key={2}>
+              <Phone />
+              <h2>Phone: </h2>
+              <div className="text-place">{account.phone}</div>
+            </div>,
+            <div className="single-row" key={3}>
+              <Email />
+              <h2>Email: </h2>
+              <div className="text-place">{account.email}</div>
+            </div>,
+            <div className="single-row" key={4}>
+              <House />
+              <h2>Address: </h2>
+              <input type="text" className="text-place" placeholder="Enter your address..." />
+            </div>,
+          ] : ""}
         <svg className="divider">
           <line y1="1" x2="1140" y2="1" stroke="#ABABAB" strokeWidth="2" />
         </svg>
@@ -234,6 +251,16 @@ const CheckoutPage = ({ setSign }) => {
           right: "70px",
           bottom: "40px"
         }}
+          onClick={() => {
+            axios.delete(baseURL + apiURL + '/cart/checkout', {
+              data: {
+                access_token: Cookies.get('accesstoken')
+              }
+            })
+              .then(response => {
+                if (response.status === 200) window.location.href = '/products'
+              })
+          }}
         >Proceed</button>
       </div>
     </div>
