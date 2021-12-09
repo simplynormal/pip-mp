@@ -3,6 +3,9 @@ import '../css/Auth.css'
 
 import { ReactComponent as GoogleLogo } from '../assets/Google_Logo.svg'
 import { apiURL, baseURL } from './Common'
+import Cookies from 'js-cookie';
+
+const axios = require('axios').default;
 
 const SignUpForm = ({ setSignIn }) => {
   const [error, setError] = React.useState({ email: false, phone: false, password: false })
@@ -39,7 +42,6 @@ const SignUpForm = ({ setSignIn }) => {
       })
         .then(response => {
           if (!response.ok) {
-            console.log(response);
             // create error object and reject if not a 2xx response code
             let err = new Error('HTTP Status Code ' + response.status)
             err.data = response.json()
@@ -69,18 +71,18 @@ const SignUpForm = ({ setSignIn }) => {
     >
       <div className="inline" style={{ margin: 0 }}>
         <label className="text" style={{ marginRight: '5px' }}>First Name
-          <input type="text" name="first_name" required />
+          <input type="text" name="first_name" autocomplete="off" required />
         </label>
         <label className="text" style={{ marginLeft: '5px' }}>Last Name
-          <input type="text" name="last_name" required />
+          <input type="text" name="last_name" autocomplete="off" required />
         </label>
       </div>
       <label className="text">Email {error.email ? <span>&nbsp; * Email already registered</span> : ""}
-        <input type="text" name="email" required />
+        <input type="text" name="email" autocomplete="off" required />
       </label>
 
       <label className="text">Phone {error.phone ? <span>&nbsp; * Phone already registered</span> : ""}
-        <input type="text" name="phone" required />
+        <input type="text" name="phone" autocomplete="off" required />
       </label>
 
       <label className="text">Password
@@ -107,9 +109,34 @@ const SignUpForm = ({ setSignIn }) => {
   )
 }
 
-const SignInForm = () => {
+const SignInForm = ({ onClose, setSigned }) => {
   return (
-    <form method="post">
+    <form onSubmit={(e) => {
+      e.preventDefault()
+      var params = {}
+      for (let i = 0; i < e.target.length; i++) {
+        if (e.target[i].name !== '' && e.target[i].name !== 'confirm_password')
+          params[e.target[i].name] = e.target[i].value
+      }
+      axios.post(baseURL + apiURL + '/account/signin', params, { withCredentials: true })
+        .then(function (response) {
+          Cookies.set('accesstoken', response.data['access_token']);
+          setSigned(true)
+          onClose()
+        })
+        .catch(err => {
+          if (err.response) {
+            var errorTemp = { password: false }
+
+            var message = ""
+            for (let [key, value] of Object.entries(err.response.data)) {
+              message += value += "\n"
+              errorTemp[key] = true
+            }
+            alert(message)
+          }
+        })
+    }}>
       <label className="text">Email
         <input type="text" name="email" required />
       </label>
@@ -132,7 +159,7 @@ const SignInForm = () => {
   )
 }
 
-export const Auth = ({ onClose, signingIn }) => {
+export const Auth = ({ onClose, signingIn, setSigned }) => {
   const [signIn, setSignIn] = React.useState(signingIn)
 
   return (
@@ -144,7 +171,7 @@ export const Auth = ({ onClose, signingIn }) => {
         <div className="main">
           <h2>welcome</h2>
           <h1>{signIn ? "Login to your account" : "Create a new account"}</h1>
-          {signIn ? <SignInForm /> : <SignUpForm setSignIn={setSignIn} />}
+          {signIn ? <SignInForm onClose={onClose} setSigned={setSigned} /> : <SignUpForm setSignIn={setSignIn} />}
           {signIn ? <button className="btn btn-google">
             <GoogleLogo />
             Or sign-in with google

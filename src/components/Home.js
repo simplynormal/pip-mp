@@ -75,8 +75,8 @@ function Home() {
       <section className="products-grid" >
         {products.map((p, index) => {
           return (
-            <a href={"/detail?uuid=" + p.uuid}>
-              <div className="grid-item" key={index}>
+            <a href={"/detail?uuid=" + p.uuid} key={index}>
+              <div className="grid-item" >
                 <img src={baseURL + p.image} alt={p.name} ></img>
                 <div className="desc">
                   {p.name}

@@ -1,8 +1,10 @@
 import React from 'react'
 import '../css/ProductList.css'
 
-import { numberWithCommas, perkTranslate, baseURL, apiURL } from './Common';
+import { numberWithCommas, perkTranslate, baseURL, apiURL, checkAccess } from './Common';
 import { ReactComponent as Cart } from "../assets/ProductPage/cart.svg"
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Options({ setSort, setCond, setPerk }) {
   return (
@@ -40,35 +42,65 @@ function Options({ setSort, setCond, setPerk }) {
   )
 }
 
-export function Item({ item }) {
+export function Item({ item, setSign, setReset }) {
   return (
-    <a className="item-href" href={"/detail?uuid=" + item.uuid}>
-      <div className="product-item">
-        <img src={baseURL + item.image} alt="p1" />
-        <p className="product-text" >{item.name}</p>
-        <div className="perk-container">
-          {item.perk.map((name, i) => {
-            return (
-              <div key={i} style={perkTranslate(name)}>{name}</div>)
-          })}
-        </div>
-        <div className="item-footer">
+    <div className="product-item"
+      onClick={() => {
+        window.location.href = "/detail?uuid=" + item.uuid;
+      }}>
+      <img src={baseURL + item.image} alt="p1" />
+      <p className="product-text" >{item.name}</p>
+      <div className="perk-container">
+        {item.perk.map((name, i) => {
+          return (
+            <div key={i} style={perkTranslate(name)}>{name}</div>)
+        })}
+      </div>
+      <div className="item-footer">
+        {item.price < 0 ?
+          <p className="product-text" style={{
+            fontWeight: "bold",
+            color: "red"
+          }}>
+            {item.price === -1 ? "Out of stock" : "Contact"}
+          </p> :
           <p className="product-text" style={{
             fontWeight: "bold",
           }}>
             {numberWithCommas(item.price)} <u>đ</u>
           </p>
-          <button className="add-cart">
-            <Cart className="cart-logo" />
-            Add to cart
-          </button>
-        </div>
+        }
+        <button
+          className={item.price < 0 ? "add-cart btn-disabled" : "add-cart"}
+          onClick={item.price > 0 ? (e) => {
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+            if (!checkAccess()) {
+              setSign(1)
+              return
+            }
+            axios.put(baseURL + apiURL + '/cart/cart', {
+              access_token: Cookies.get('accesstoken'),
+              uuid: item.uuid,
+              quantity: 'add'
+            })
+              .then(response => {
+                if (response.status === 200) setReset()
+              })
+          } : (e) => {
+            e.stopPropagation()
+            e.nativeEvent.stopImmediatePropagation();
+          }}
+        >
+          <Cart className="cart-logo" />
+          Add to cart
+        </button>
       </div>
-    </a>
+    </div>
   )
 }
 
-function ProductList() {
+function ProductList({ setSign, setReset }) {
   const [items, setItems] = React.useState([])
   const [filter, setFilter] = React.useState({ sort: true, cond: 0, perk: 0 })
   var url = baseURL + apiURL
@@ -160,7 +192,7 @@ function ProductList() {
         <div className="list-container no-select">
           {filterItem(items).map((item, i) => {
             return (
-              <Item item={item} key={i} />
+              <Item item={item} key={i} setSign={setSign} setReset={setReset} />
             )
           })}
         </div>

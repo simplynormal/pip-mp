@@ -1,8 +1,6 @@
 import React from 'react'
 import "../css/CheckoutPage.css"
 
-import p1 from "../database/products/p1.png";
-
 import { ReactComponent as Logo } from "../assets/CheckoutPage/checkout.svg"
 import { ReactComponent as Minus } from "../assets/CheckoutPage/minus.svg"
 import { ReactComponent as Plus } from "../assets/CheckoutPage/plus.svg"
@@ -19,40 +17,11 @@ import { ReactComponent as Discover } from "../assets/CheckoutPage/discover.svg"
 import { ReactComponent as Momo } from "../assets/CheckoutPage/momo.svg"
 import { ReactComponent as Shopee } from "../assets/CheckoutPage/shopee.svg"
 import { ReactComponent as Zalo } from "../assets/CheckoutPage/zalo.svg"
-import { numberWithCommas } from './Common';
+import { ReactComponent as Delete } from "../assets/CheckoutPage/delete.svg"
+import { apiURL, baseURL, checkAccess, numberWithCommas } from './Common';
+import Cookies from 'js-cookie';
 
-const itemsFetched = [
-  {
-    name: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste, minima.",
-    image: p1,
-    price: 12000000,
-    quantity: 69,
-  },
-  {
-    name: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste, minima.",
-    image: p1,
-    price: 12000000,
-    quantity: 69,
-  },
-  {
-    name: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste, minima.",
-    image: p1,
-    price: 12000000,
-    quantity: 69,
-  },
-  {
-    name: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste, minima.",
-    image: p1,
-    price: 12000000,
-    quantity: 69,
-  },
-  {
-    name: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste, minima.",
-    image: p1,
-    price: 12000000,
-    quantity: 69,
-  },
-]
+const axios = require('axios').default;
 
 const methods = [
   {
@@ -69,8 +38,7 @@ const methods = [
   },
 ]
 
-function CheckoutRow({ item, setQuantity }) {
-  var quantity = item.quantity
+function CheckoutRow({ item, quantity, setQuantity }) {
   const [editingQuantity, setEditingQuantity] = React.useState(false)
   const setFilterQuantity = (q) => {
     var val = q
@@ -81,7 +49,7 @@ function CheckoutRow({ item, setQuantity }) {
 
   return [
     <div className="img-wrapper" key={0}>
-      <img src={item.image} alt="p1" />
+      <img src={baseURL + item.image} alt="p1" />
     </div>,
     <p className="checkout-name" key={1}>{item.name}</p>,
     <p className="checkout-price" key={2}> {numberWithCommas(item.price)} <u>đ</u> </p>,
@@ -123,6 +91,10 @@ function CheckoutRow({ item, setQuantity }) {
       }}
         onClick={() => { setFilterQuantity(quantity + 1) }}
       />
+      <div className="remove" onClick={() => { setFilterQuantity(0) }}>
+        <Delete className="btn-remove" />
+        Remove
+      </div>
     </div>
   ]
 }
@@ -154,100 +126,118 @@ function Method({ item, chosen, onClick }) {
     </div>
   )
 }
-export default class CheckoutPage extends React.Component {
-  titles = ["Image", "Product name", "Price / Product", "Total price", "Quantity"]
-  state = {
-    methodID: 0,
-    items: itemsFetched
-  }
-  render() {
-    var totalPrice = 0
+const CheckoutPage = ({ setSign }) => {
+  const titles = ["Image", "Product name", "Price / Product", "Total price", "Quantity"]
+  const [methodID, setMethodID] = React.useState(0)
+  const [items, setItems] = React.useState(null)
 
-    return (
-      <div className="checkout-container">
-        <div className="header-container no-select">
-          <div>
-            <Logo />
-            checkout
-          </div>
+  const access_token = checkAccess()
+
+  React.useEffect(() => {
+    axios.post(baseURL + apiURL + '/cart/cart', {
+      access_token: Cookies.get('accesstoken')
+    })
+      .then(response => setItems(response.data))
+      .catch(err => {
+        if (err.response.status === 401)
+          setItems([])
+      })
+  }, [access_token]);
+
+  var totalPrice = 0
+
+  if (!access_token) setSign(1)
+
+  return access_token && items ? (
+    <div className="checkout-container">
+      <div className="header-container no-select">
+        <div>
+          <Logo />
+          checkout
         </div>
-        <div className="common-checkout">
-          <div className="result-container">
-            {this.titles.map((name, i) => {
-              return <div className="title-desc" key={i}>
-                {name}
-              </div>
-            })}
-            {this.state.items.map((item, i) => {
-              totalPrice += item.price * item.quantity
+      </div>
+      <div className="common-checkout">
+        <div className="result-container">
+          {titles.map((name, i) => {
+            return <div className="title-desc" key={i}>
+              {name}
+            </div>
+          })}
+          {items.map((item, i) => {
+            totalPrice += item.item.price * item.quantity
 
-              return (<CheckoutRow key={i} item={item} setQuantity={(quantity) => {
-                var rv = this.state.items
+            return (<CheckoutRow key={i} item={item.item} quantity={item.quantity} setQuantity={(quantity) => {
+              var rv = items.slice(0, items.length)
+              if (quantity === 0)
+                rv.splice(i, 1)
+              else
                 rv[i].quantity = quantity
-                this.setState({ items: rv })
-              }} />)
-            })}
-          </div>
-          <svg className="divider">
-            <line y1="1" x2="1140" y2="1" stroke="#ABABAB" strokeWidth="2" />
-          </svg>
-          <div className="last-part">
-            <h3 className="total-cost" >Total cost:
-              <span>
-                {numberWithCommas(totalPrice)} <u>đ</u>
-              </span></h3>
-          </div>
+              setItems(rv)
+            }} />)
+          })}
         </div>
-        <div className="checkout-label">
-          Personal information
-        </div>
-        <div className="common-checkout" style={{
-          marginTop: "0",
-          padding: "35px 0 100px 0"
-        }}>
-          <div className="single-row">
-            <User />
-            <h2>User: </h2>
-            <div>Lastname Midname Firstname</div>
-          </div>
-          <div className="single-row">
-            <Phone />
-            <h2>Phone: </h2>
-            <div>0969696969</div>
-          </div>
-          <div className="single-row">
-            <House />
-            <h2>Address: </h2>
-            <div>6-9 Cool Street, Cool Sub-district, Cool District.</div>
-          </div>
-          <svg className="divider">
-            <line y1="1" x2="1140" y2="1" stroke="#ABABAB" strokeWidth="2" />
-          </svg>
-          <div className="method-container">
-            {methods.map((item, i) => {
-              return <Method
-                key={i}
-                item={item}
-                chosen={i === this.state.methodID}
-                onClick={() => { this.setState({ methodID: i }) }}
-              />
-            })}
-          </div>
-          <h3 className="total-cost" style={{
-            position: 'absolute',
-            right: "70px",
-            bottom: "120px",
-          }}>Total cost:
+        <svg className="divider">
+          <line y1="1" x2="1140" y2="1" stroke="#ABABAB" strokeWidth="2" />
+        </svg>
+        <div className="last-part">
+          <h3 className="total-cost" >Total cost:
             <span>
               {numberWithCommas(totalPrice)} <u>đ</u>
             </span></h3>
-          <button className="proceed-btn" style={{
-            position: 'absolute',
-            right: "70px",
-            bottom: "40px"
-          }}>Proceed</button>
         </div>
       </div>
-    )
-  }
+      <div className="checkout-label">
+        Personal information
+      </div>
+      <div className="common-checkout" style={{
+        marginTop: "0",
+        padding: "35px 0 100px 0"
+      }}>
+        <div className="single-row">
+          <User />
+          <h2>User: </h2>
+          <div>Lastname Midname Firstname</div>
+        </div>
+        <div className="single-row">
+          <Phone />
+          <h2>Phone: </h2>
+          <div>0969696969</div>
+        </div>
+        <div className="single-row">
+          <House />
+          <h2>Address: </h2>
+          <div>6-9 Cool Street, Cool Sub-district, Cool District.</div>
+        </div>
+        <svg className="divider">
+          <line y1="1" x2="1140" y2="1" stroke="#ABABAB" strokeWidth="2" />
+        </svg>
+        <div className="method-container">
+          {methods.map((item, i) => {
+            return <Method
+              key={i}
+              item={item}
+              chosen={i === methodID}
+              onClick={() => { setMethodID(i) }}
+            />
+          })}
+        </div>
+        <h3 className="total-cost" style={{
+          position: 'absolute',
+          right: "70px",
+          bottom: "120px",
+        }}>Total cost:
+          <span>
+            {numberWithCommas(totalPrice)} <u>đ</u>
+          </span></h3>
+        <button className="proceed-btn" style={{
+          position: 'absolute',
+          right: "70px",
+          bottom: "40px"
+        }}
+        >Proceed</button>
+      </div>
+    </div>
+  ) : ""
 }
+
+export default CheckoutPage

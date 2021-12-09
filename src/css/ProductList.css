@@ -184,13 +184,13 @@
     transition: all 250ms;
 }
 
-.product-item .item-footer .add-cart:hover {
+.product-item .item-footer .add-cart:not(.btn-disabled):hover {
     background-color: #2264D1;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     transform: translateY(-1px)
 }
 
-.product-item .item-footer .add-cart:active {
+.product-item .item-footer .add-cart:not(.btn-disabled):active {
     background-color: #1a4fa5;
     box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
     transform: translateY(0)

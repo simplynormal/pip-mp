@@ -5,13 +5,13 @@ import ProductFilter from './ProductFilter'
 import ProductList from './ProductList'
 
 
-function ProductPage() {
+function ProductPage({ setSign, setReset }) {
 
   return (
     <div style={{ margin: "auto" }}>
       <div className="main-container">
         <ProductFilter />
-        <ProductList />
+        <ProductList setSign={setSign} setReset={setReset} />
       </div>
     </div>
   )

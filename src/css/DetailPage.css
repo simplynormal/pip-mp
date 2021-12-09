@@ -186,12 +186,12 @@
     transition: all 0.3s ease 0s;
 }
 
-.main-frame .btn-container button:hover {
+.main-frame .btn-container button:not(.btn-disabled):hover {
     transform: translate(-1px, -1px);
     background: rgb(61, 161, 255);
 }
 
-.main-frame .btn-container button:active {
+.main-frame .btn-container button:not(.btn-disabled):active {
     transform: translate(0, 0);
     background: rgb(0, 113, 219);
 }

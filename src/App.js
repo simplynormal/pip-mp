@@ -8,18 +8,19 @@ import DetailPage from './components/DetailPage';
 import CheckoutPage from './components/CheckoutPage';
 
 function App() {
+  const [sign, setSign] = React.useState(0);
+  const [reset, setReset] = React.useState(false);
+
   return (
     <div className="app">
-      <NavBar quantity={10} />
+      <NavBar sign={sign} setSign={setSign} reset={reset} />
       <div className="app-container">
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/products" element={<ProductPage />} />
-            <Route exact path="/detail" element={<DetailPage />} />
-            <Route exact path="/checkout" element={<CheckoutPage />} />
-            {/* <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/signin" element={<SignIn />} /> */}
+            <Route exact path="/products" element={<ProductPage setSign={setSign} setReset={() => setReset(!reset)} />} />
+            <Route exact path="/detail" element={<DetailPage setSign={setSign} setReset={() => setReset(!reset)} />} />
+            <Route exact path="/checkout" element={<CheckoutPage setSign={setSign} />} />
           </Routes>
         </BrowserRouter >
       </div>

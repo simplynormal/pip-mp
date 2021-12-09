@@ -57,3 +57,8 @@ code {
     margin-top: 120px;
     min-height: 500px;
 }
+
+.btn-disabled {
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+}

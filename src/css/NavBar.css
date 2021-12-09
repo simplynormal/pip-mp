@@ -184,7 +184,8 @@ header input[type=password]:focus {
 
 .cart:hover .cart-hover .row .img-wrapper {
     display: flex;
-    padding: 7px;
+    height: 90px;
+    width: 90px;
     align-items: center;
     justify-content: center;
     background: #F0F0F0;

@@ -107,6 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .checkout-quantity svg {
@@ -123,7 +124,45 @@
     transition: all 0.3s ease 0s;
 }
 
-.checkout-quantity svg:hover {
+.checkout-quantity .remove {
+    position: absolute;
+    bottom: 10px;
+    left: calc(50% - 50px);
+    width: 100px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    color: white;
+    background: grey;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.checkout-quantity .remove .btn-remove {
+    width: 30px;
+    height: 30px;
+    fill: white;
+    cursor: unset;
+    padding: 5px;
+}
+
+.checkout-quantity .remove:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px)
+}
+
+.checkout-quantity .remove:active {
+    filter: grayscale(20%);
+    transform: translateY(0)
+}
+
+.checkout-quantity svg:not(.btn-remove):hover {
     filter: brightness(1.2);
 }
 

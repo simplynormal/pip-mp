@@ -1,54 +1,19 @@
 import React from 'react'
 import "../css/NavBar.css"
 import "../css/CheckoutPage.css"
-import p1 from "../database/products/p1.png";
-import { numberWithCommas, perkTranslate } from './Common';
+import { apiURL, baseURL, checkAccess, numberWithCommas, perkTranslate } from './Common';
 import { ReactComponent as Logo } from "../assets/logo.svg"
 import { ReactComponent as Account } from "../assets/NavBar/account.svg"
 import { ReactComponent as Minus } from "../assets/CheckoutPage/minus.svg"
 import { ReactComponent as Plus } from "../assets/CheckoutPage/plus.svg"
+import { ReactComponent as Delete } from "../assets/CheckoutPage/delete.svg"
 import Auth from './Auth';
+import Cookies from 'js-cookie';
 
-const items = [
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 12000000,
-    perk: ["Hot deal!", "50% OFF"],
-    quantity: 69,
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 12000000,
-    perk: ["Hot deal!", "50% OFF"],
-    quantity: 69,
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 12000000,
-    perk: ["Hot deal!", "50% OFF"],
-    quantity: 69,
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 12000000,
-    perk: ["Hot deal!", "50% OFF"],
-    quantity: 69,
-  },
-  {
-    name: "Iphone 13",
-    image: p1,
-    price: 12000000,
-    perk: ["Hot deal!", "50% OFF"],
-    quantity: 69,
-  },
-]
+const axios = require('axios').default;
 
-function CartRow({ item, setQuantity }) {
-  var quantity = item.quantity
+
+function CartRow({ item, quantity, setQuantity }) {
   const [editingQuantity, setEditingQuantity] = React.useState(false)
   const setFilterQuantity = (q) => {
     var val = q
@@ -57,10 +22,12 @@ function CartRow({ item, setQuantity }) {
     setQuantity(val)
   }
 
+  var tempQuantity = quantity
+
   return (
     <div className="row">
       <div className="img-wrapper">
-        <img src={p1} alt="asd" />
+        <img src={baseURL + item.image} alt="asd" />
       </div>
       <div className="desc">
         <p className="name">{item.name}</p>
@@ -84,7 +51,7 @@ function CartRow({ item, setQuantity }) {
         {editingQuantity ?
           <textarea
             autoFocus
-            value={quantity}
+            defaultValue={quantity}
             className="text-area"
             rows="1"
             onKeyDown={(e) => {
@@ -93,10 +60,12 @@ function CartRow({ item, setQuantity }) {
             }}
             onFocus={(e) => e.target.select()}
             onChange={(e) => {
-              setFilterQuantity(e.target.value)
+              tempQuantity = e.target.value
             }}
             onBlur={() => {
               setEditingQuantity(false)
+              if (tempQuantity !== quantity)
+                setFilterQuantity(tempQuantity)
             }}
           /> :
           <p
@@ -111,14 +80,46 @@ function CartRow({ item, setQuantity }) {
         }}
           onClick={() => { setFilterQuantity(quantity + 1) }}
         />
+        <Delete style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "20px",
+          height: "20px",
+          padding: "3px",
+          fill: "white",
+          background: "grey",
+        }}
+          onClick={() => { setFilterQuantity(0) }}
+        />
       </div>
     </div>
   )
 }
 
-export function NavBar() {
-  const [sign, setSign] = React.useState(0)
-  const [navItems, setNavItems] = React.useState(items)
+export function NavBar({ sign, setSign, reset }) {
+  const [signed, setSigned] = React.useState(false)
+  const [changed, setChanged] = React.useState(false)
+  const [navItems, setNavItems] = React.useState([])
+
+  React.useEffect(() => {
+    axios.post(baseURL + apiURL + '/cart/cart', {
+      access_token: Cookies.get('accesstoken')
+    })
+      .then(response => {
+        setNavItems(response.data)
+        setSigned(true)
+      })
+      .catch(err => {
+        console.log(err.response.data);
+        if (err.response.status === 401)
+          setNavItems([])
+      })
+
+    setSigned(checkAccess())
+  }, [signed, reset, changed]);
+
+
   const quantityText = navItems.length > 99 ? "99+" : navItems.length
   var search = ''
   var totalPrice = 0
@@ -147,8 +148,18 @@ export function NavBar() {
       <div className="account">
         <Account className="suffix" onClick={() => { setSign(1) }} />
         <div className="account-hover">
-          <div className="row" onClick={() => { setSign(1) }}>Sign In</div>
-          <div className="row" onClick={() => { setSign(2) }}>Sign Up</div>
+          {signed ?
+            <div className="row" onClick={() => {
+              axios.delete(baseURL + apiURL + '/account/signout')
+                .then(_ => {
+                  Cookies.remove('accesstoken')
+                  setSigned(false)
+                })
+            }}>Sign Out</div> :
+            [
+              <div className="row" key={1} onClick={() => { setSign(1) }}>Sign In</div>,
+              <div className="row" key={2} onClick={() => { setSign(2) }}>Sign Up</div>
+            ]}
         </div>
       </div>
 
@@ -174,11 +185,34 @@ export function NavBar() {
         <div className="cart-hover">
           <div className="container">
             {navItems.map((item, i) => {
-              totalPrice += item.price * item.quantity
-              return <CartRow key={i} item={item} setQuantity={(q) => {
-                var temp = navItems.slice(0, navItems.length)
-                temp[i].quantity = q
-                setNavItems(temp)
+              totalPrice += item.item.price * item.quantity
+              return <CartRow key={i} item={item.item} quantity={item.quantity} setQuantity={(q) => {
+                q = Number(q)
+                const url = baseURL + apiURL + '/cart/cart'
+
+                if (q === 0)
+                  axios.delete(url, {
+                    data: {
+                      access_token: Cookies.get('accesstoken'),
+                      uuid: item.item.uuid,
+                    }
+                  })
+                    .then(response => {
+                      if (response.status === 200)
+                        setChanged(!changed)
+                    })
+                    .catch(err => console.log(err.response.data))
+                else
+                  axios.put(url, {
+                    access_token: Cookies.get('accesstoken'),
+                    uuid: item.item.uuid,
+                    quantity: q
+                  })
+                    .then(response => {
+                      if (response.status === 200)
+                        setChanged(!changed)
+                    })
+                    .catch(err => console.log(err.response.data))
               }} />
             })}
           </div>
@@ -191,7 +225,7 @@ export function NavBar() {
           </div>
         </div>
       </div>
-      {sign ? <Auth onClose={() => { setSign(0) }} signingIn={sign === 1} /> : ""}
+      {sign ? <Auth onClose={() => { setSign(0) }} signingIn={sign === 1} setSigned={setSigned} /> : ""}
     </header >
   )
 }
