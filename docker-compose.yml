@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+    frontend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                VARIANT: 17.1-bullseye
+                USERNAME: node
+        ports:
+            - '3000:3000'
+        env_file:
+            - ./.env
+            # - ./.env.local
+        stdin_open: true

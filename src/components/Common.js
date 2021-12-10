@@ -29,6 +29,7 @@ export function checkAccess() {
   } else return false
 }
 
-export const baseURL = "https://pip-3103.herokuapp.com"
-// export const baseURL = "http://127.0.0.1:8000"
-export const apiURL = "/api/v1"
+export const baseURL = process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000'
+export const apiURL = process.env.REACT_APP_API_URL || '/api/v1'
+console.log(baseURL)
+console.log(process.env.REACT_APP_BASE_URL)
